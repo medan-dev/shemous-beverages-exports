@@ -1,0 +1,69 @@
+import type { Metadata } from 'next'
+import { Inter, Outfit, Cormorant_Garamond, Gochi_Hand } from 'next/font/google'
+import './globals.css'
+import ClientLayout from '@/components/ClientLayout'
+
+const inter = Inter({
+  variable: '--font-inter',
+  subsets: ['latin'],
+  display: 'swap',
+})
+
+const outfit = Outfit({
+  variable: '--font-outfit',
+  subsets: ['latin'],
+  display: 'swap',
+})
+
+const cormorant = Cormorant_Garamond({
+  variable: '--font-cormorant',
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  display: 'swap',
+})
+
+const gochiHand = Gochi_Hand({
+  variable: '--font-gochi',
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+})
+
+export const metadata: Metadata = {
+  title: 'Shemous Beverages & Exports | Premium Organic Ugandan Juices',
+  description: "Uganda's premier exporter of global-ready organic fruit juices. Partner with Shemous to distribute our heritage collection worldwide.",
+  openGraph: {
+    title: 'Shemous Beverages & Exports',
+    description: 'Bringing the goodness of the Pearl of Africa to the world with clinical precision and sustainable organic farming.',
+    url: 'https://shemous.co.ug',
+    siteName: 'Shemous Beverages',
+    images: [
+      {
+        url: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&q=800',
+        width: 1200,
+        height: 630,
+        alt: 'Shemous Premium Organic Masterpieces',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.variable} ${outfit.variable} ${cormorant.variable} ${gochiHand.variable}`} style={{ backgroundColor: 'var(--background)' }} suppressHydrationWarning>
+        <div className="noise-overlay" />
+        <ClientLayout>
+            {children}
+        </ClientLayout>
+      </body>
+    </html>
+  )
+}
