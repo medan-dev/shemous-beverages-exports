@@ -219,6 +219,7 @@ const DynamicHeroSplash = () => {
 
     let animId: number
     function animate() {
+      if (!ctx) return
       ctx.clearRect(0, 0, 900, 900)
 
       drawLightRays(ctx)
