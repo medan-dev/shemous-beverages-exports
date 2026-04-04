@@ -5,6 +5,8 @@ export const metadata = {
   title: 'Manage Orders | Shemous Admin',
 }
 
+export const dynamic = 'force-dynamic'
+
 export default async function OrdersPage() {
   const supabase = await createClient()
 

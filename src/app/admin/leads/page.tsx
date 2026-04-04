@@ -5,6 +5,8 @@ export const metadata = {
   title: 'Manage Leads | Shemous Admin',
 }
 
+export const dynamic = 'force-dynamic'
+
 export default async function LeadsPage() {
   const supabase = await createClient()
 

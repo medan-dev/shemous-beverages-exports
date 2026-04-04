@@ -15,6 +15,8 @@ export const metadata = {
   title: 'Business Analytics | Shemous Admin',
 }
 
+export const dynamic = 'force-dynamic'
+
 export default async function AnalyticsPage() {
   const supabase = await createClient()
 
