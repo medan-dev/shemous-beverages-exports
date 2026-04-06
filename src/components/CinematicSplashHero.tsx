@@ -38,8 +38,7 @@ export default function CinematicSplashHero() {
       style={{
         position: 'relative',
         width: '100%',
-        height: '100vh',
-        minHeight: 700,
+        minHeight: '120vh',
         overflow: 'hidden',
         backgroundColor: '#001a14',
         /* Cinematic convex curve at bottom */
@@ -161,11 +160,11 @@ export default function CinematicSplashHero() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          textAlign: 'center',
-          padding: 'clamp(6rem, 12vh, 10rem) clamp(1.5rem, 5vw, 6rem) 0 clamp(1.5rem, 5vw, 6rem)', /* Lowered for header clearance */
+          /* Radical Spacing: Guaranteed total clearance for both header (fixed) and footer waves */
+          padding: 'clamp(18rem, 26vh, 22rem) clamp(1.5rem, 5vw, 6rem) clamp(22rem, 36vh, 32rem) clamp(1.5rem, 5vw, 6rem)',
           y: contentY,
-          /* Sophisticated centered scrim to lift content without dulling edges */
-          background: 'radial-gradient(circle at center, rgba(0,25,20,0.55) 0%, rgba(0,25,20,0.2) 50%, transparent 85%)',
+          /* Deep vignette scrim for professional lift */
+          background: 'radial-gradient(circle at center, rgba(0,20,15,0.65) 0%, rgba(0,20,15,0.2) 60%, transparent 90%)',
         }}
       >
         {/* Brand pill */}
@@ -297,7 +296,15 @@ export default function CinematicSplashHero() {
         </motion.div>
       </motion.div>
 
-      {/* ── Scroll indicator ─────────────────────────────────── */}
+      {/* ── Professional Curved Liquid Border ────────────────── */}
+      <div style={{ position: 'absolute', bottom: -1, left: 0, width: '100%', zIndex: 15, pointerEvents: 'none' }}>
+        <svg viewBox="0 0 1440 180" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', display: 'block' }} preserveAspectRatio="none">
+          <path 
+            d="M0 180H1440V100C1440 100 1260 20 1080 20C900 20 720 140 540 140C360 140 180 20 0 20V180Z"
+            fill="white"
+          />
+        </svg>
+      </div>
 
       {/* Pulse keyframe */}
       <style>{`

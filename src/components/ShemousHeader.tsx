@@ -36,7 +36,7 @@ const ShemousHeader = () => {
           top: 0, 
           left: 0, 
           right: 0, 
-          height: 'clamp(90px, 15vh, 140px)', 
+          height: 'clamp(110px, 16vh, 160px)', 
           display: 'flex', 
           alignItems: 'center', 
           justifyContent: 'space-between', 
@@ -48,19 +48,21 @@ const ShemousHeader = () => {
           transition: 'all 0.3s ease'
         }}
       >
-        {/* Left Side: Logo */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '3rem' }}>
-          <Link href="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center' }}>
+        {/* Left Side: Logo & Navigation */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6rem' }}>
+          <Link href="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', marginLeft: '-1.5rem' }}>
              <motion.div
                initial={{ opacity: 0, x: -30 }}
                animate={{ opacity: 1, x: 0 }}
                transition={{ duration: 1.2, ease: "easeOut" }}
-               style={{ height: 'clamp(70px, 10vh, 110px)', display: 'flex', alignItems: 'center' }}
+               // Massively increased logo container bounds
+               style={{ height: 'clamp(100px, 15vh, 150px)', display: 'flex', alignItems: 'center' }}
              >
                 <img 
-                  src="/images/shemous_logo_master.png" 
+                  src="/images/shemous_logo_master_transparent.png" 
                   alt="Shemous Beverages & Exports" 
-                  style={{ height: '100%', width: 'auto', objectFit: 'contain', mixBlendMode: 'screen' }} 
+                  // Scaled to overcome any potential built-in PNG padding
+                  style={{ height: '100%', width: 'auto', objectFit: 'contain', transform: 'scale(1.5)', transformOrigin: 'left center' }} 
                 />
              </motion.div>
           </Link>

@@ -8,6 +8,8 @@ import { supabase } from '@/lib/supabase'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'framer-motion'
 import { createPortal } from 'react-dom'
+import { uploadProductImage } from '@/app/actions/uploadImage'
+import { saveProductAction } from '@/app/actions/productActions'
 
 type Product = {
   id: string
@@ -43,6 +45,7 @@ export default function AdminProducts() {
   const [price, setPrice] = useState('')
   const [stockStatus, setStockStatus] = useState('in_stock')
   const [isFeatured, setIsFeatured] = useState(false)
+  const [description, setDescription] = useState('')
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
 
@@ -54,7 +57,7 @@ export default function AdminProducts() {
     // Admin panel stays in sync with any DB change automatically
     const channel = supabase
       .channel('admin-products-realtime')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, (payload) => {
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, (payload: any) => {
         fetchProducts()
         // Flash the row that changed so admin can see it updated
         if (payload.new && (payload.new as any).id) {
@@ -76,7 +79,7 @@ export default function AdminProducts() {
   const openAddPanel = () => {
     setEditingProduct(null)
     setName(''); setCategory('Banana Juice'); setPrice('')
-    setStockStatus('in_stock'); setIsFeatured(false)
+    setStockStatus('in_stock'); setIsFeatured(false); setDescription('')
     setImageFile(null); setImagePreview(null)
     setIsPanelOpen(true)
   }
@@ -86,6 +89,7 @@ export default function AdminProducts() {
     setName(p.name); setCategory(p.category)
     setPrice(p.price ? String(p.price) : '')
     setStockStatus(p.stock_status); setIsFeatured(p.is_featured)
+    setDescription((p as any).description || '')
     setImageFile(null); setImagePreview(p.image_url)
     setIsPanelOpen(true)
   }
@@ -109,32 +113,52 @@ export default function AdminProducts() {
     if (imageFile) {
       const fileExt = imageFile.name.split('.').pop()
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('products')
-        .upload(`public/${fileName}`, imageFile)
+      const uploadPath = `public/${fileName}`
 
-      if (!uploadError && uploadData) {
+      const formData = new FormData()
+      formData.append('file', imageFile)
+      formData.append('path', uploadPath)
+
+      const result = await uploadProductImage(formData)
+
+      if (result.error) {
+         console.error('Upload Error:', result.error)
+         alert(`Image Upload Failed: ${result.error}. Ensure you have admin privileges.`)
+         setIsSubmitting(false)
+         return
+      }
+
+      const uploadData = result.data
+
+      if (uploadData) {
         const { data: urlData } = supabase.storage.from('products').getPublicUrl(uploadData.path)
         imageUrl = urlData.publicUrl
       }
     }
 
-    const payload = {
-      name, category,
+    const payload: any = {
+      name: name.trim(), 
+      category: category.trim(),
       price: price ? parseFloat(price) : null,
-      stock_status: stockStatus,
+      stock_status: stockStatus.trim(),
       is_featured: isFeatured,
-      image_url: imageUrl,
+      description: description.trim(),
+      image_url: imageUrl ? imageUrl.trim() : null,
+      updated_at: new Date().toISOString()
     }
 
-    let error
-    if (editingProduct) {
-      ;({ error } = await supabase.from('products').update(payload).eq('id', editingProduct.id))
-    } else {
-      ;({ error } = await supabase.from('products').insert([payload]))
-    }
+    console.log('[AdminProducts] Saving payload:', JSON.stringify(payload, null, 2))
 
-    if (!error) { closePanel() } else { console.error('Save error:', error) }
+    const resultAction = await saveProductAction(payload, editingProduct?.id)
+
+    if (resultAction.success) { 
+       console.log('[AdminProducts] Save successful. Updated record:', resultAction.data)
+       fetchProducts() 
+       closePanel() 
+    } else { 
+       console.error('[AdminProducts] Save error details:', resultAction.error)
+       alert(`Save failed: ${resultAction.error}`) 
+    }
     setIsSubmitting(false)
     // Realtime subscription will auto-refresh the list
   }
@@ -338,6 +362,16 @@ export default function AdminProducts() {
                 <div>
                   <label style={labelStyle}>Product Name *</label>
                   <input value={name} onChange={e => setName(e.target.value)} required placeholder="e.g. Organic Heritage Nectar" style={inputStyle} />
+                </div>
+
+                <div>
+                  <label style={labelStyle}>Description</label>
+                  <textarea 
+                    value={description} 
+                    onChange={e => setDescription(e.target.value)} 
+                    placeholder="Describe the product heritage, flavor profile, and export status..." 
+                    style={{ ...inputStyle, height: '100px', resize: 'none' }} 
+                  />
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>

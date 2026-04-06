@@ -46,70 +46,6 @@ const categories = [
 ]
 
 
-const fallbackProducts: any[] = [
-  // Banana Line
-  { id: 1,  name: 'Classic Banana Nectar',      category: 'Banana Juice',       image: '/images/nectar.png',                                                              image_url: '', status: 'Export Ready', heritage: true,
-    description: 'Cold-pressed from Ugandan Bogoya bananas, this flagship nectar delivers a velvety, naturally sweet profile with every glass.' },
-  { id: 4,  name: 'Banana Ginger Blend',        category: 'Banana Juice',       image: '/images/nectar.png',                                                              image_url: '', status: 'Export Ready',
-    description: 'The bold warmth of Ugandan ginger meets the sweetness of ripe Bogoya bananas in this spiced, functional juice.' },
-  { id: 6,  name: 'Green Banana Juice',         category: 'Banana Juice',       image: '/images/nectar.png',                                                              image_url: '', status: 'Export Ready',
-    description: 'Extracted from unripe Ugandan matoke, rich in resistant starch and prebiotics for digestive wellness.' },
-  { id: 11, name: 'Natural Banana Vinegar',     category: 'Banana Juice',       image: '/images/nectar.png',                                                              image_url: '', status: 'Export Ready',
-    description: 'Fermented from 100% organic banana pulp — a probiotic-rich, naturally tangy vinegar for culinary and wellness use.' },
-  { id: 2,  name: 'Tropical Banana Smoothie',   category: 'Banana Smoothie',    image: '/images/smoothie.png',                                                            image_url: '', status: 'Export Ready',
-    description: 'A thick, blended banana smoothie fortified with local honey and lime — the ultimate nutritional powerhouse.' },
-  { id: 3,  name: 'Organic Banana Milk',        category: 'Banana Milk',        image: '/images/milk.png',                                                                image_url: '', status: 'Export Ready',
-    description: 'Lactose-free, organic banana milk made from ripe Ugandan Ndiizi bananas. A premium dairy alternative.' },
-  { id: 7,  name: 'Banana Cinnamon Latte',      category: 'Banana Milk',        image: '/images/milk.png',                                                                image_url: '', status: 'Export Ready',
-    description: 'A warming fusion of banana milk and Ceylon cinnamon — a café-quality drink crafted for international tastes.' },
-  { id: 5,  name: 'Dried Banana Chips',         category: 'Dried Banana Chips', image: 'https://images.unsplash.com/photo-1574226516831-e1dff420e562?w=800&q=80',        image_url: '', status: 'Export Ready', featured: true,
-    description: 'Sun-dried and lightly seasoned Gonja banana chips — a crunchy, zero-additive snack certified for global export.' },
-  // Ginger Line
-  { id: 13, name: 'Pure Ginger Shot',           category: 'Ginger',             image: '/images/ginger_shot.png',                                                         image_url: '', status: 'Export Ready', featured: true,
-    description: 'A powerful, 100% cold-pressed shot from Ugandan organic ginger — high in gingerol, anti-inflammatory, and immune-boosting.' },
-  { id: 14, name: 'Ginger Lemon Detox',         category: 'Ginger',             image: '/images/ginger_lemon.png',                                                        image_url: '', status: 'Export Ready',
-    description: 'A zesty, alkalizing blend of fresh ginger, lemon, and turmeric — a daily detox ritual in every bottle.' },
-  { id: 15, name: 'Ginger Hibiscus Infusion',   category: 'Ginger',             image: 'https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=800&q=80',              image_url: '', status: 'Export Ready',
-    description: 'Ugandan ginger meets dried hibiscus flowers for a vibrant, ruby-red infusion with a sweet-tart finish.' },
-  { id: 16, name: 'Ginger Turmeric Wellness',   category: 'Ginger',             image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=800&q=80',          image_url: '', status: 'Export Ready',
-    description: 'A golden elixir of ginger, turmeric, black pepper, and coconut water for maximum bioavailability and daily vitality.' },
-  // Pineapple Line
-  { id: 17, name: 'Golden Pineapple Nectar',    category: 'Pineapple',          image: '/images/pineapple_nectar.png',                                                    image_url: '', status: 'Export Ready', featured: true,
-    description: 'Cold-pressed from Uganda\'s sweet MD2 pineapples — an enzyme-rich, sun-golden nectar with zero added sugar.' },
-  { id: 18, name: 'Pineapple Ginger Blast',     category: 'Pineapple',          image: '/images/pineapple_nectar.png',                                                    image_url: '', status: 'Export Ready',
-    description: 'The tropical sweetness of MD2 pineapple fused with fiery Ugandan ginger — a metabolism-boosting functional juice.' },
-  { id: 19, name: 'Pineapple Mint Cooler',      category: 'Pineapple',          image: '/images/pineapple_mint.png',                                                      image_url: '', status: 'Export Ready',
-    description: 'A fresh, light pineapple juice infused with Ugandan spearmint — perfectly crafted for summer and wellness markets.' },
-  // Tropical Juice Line
-  { id: 20, name: 'Passion Fruit Elixir',       category: 'Tropical Juice',     image: 'https://images.unsplash.com/photo-1506459225024-1428097a7e18?w=800&q=80',         image_url: '', status: 'Export Ready', heritage: true,
-    description: 'Intensely aromatic, hand-scooped Ugandan passion fruit juice — naturally high in Vitamin C and antioxidants.' },
-  { id: 21, name: 'Mango Sunrise Juice',        category: 'Tropical Juice',     image: 'https://images.unsplash.com/photo-1546173159-315724a31696?w=800&q=80',             image_url: '', status: 'Export Ready', featured: true,
-    description: 'Fresh-pressed from Uganda\'s East African Dodo mangoes — a sunrise-orange juice with a caramel-sweet depth.' },
-  { id: 22, name: 'Tamarind Hibiscus Blend',    category: 'Tropical Juice',     image: 'https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=800&q=80',             image_url: '', status: 'Export Ready',
-    description: 'A bold, tangy blend of tamarind concentrate and hibiscus — an African-inspired, antioxidant-rich tonic.' },
-  { id: 23, name: 'Moringa Green Juice',        category: 'Tropical Juice',     image: 'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=800&q=80',          image_url: '', status: 'Export Ready',
-    description: 'Blended from Ugandan "miracle tree" moringa leaves — one of Africa\'s most nutrient-dense supergreens per serving.' },
-  { id: 24, name: 'Watermelon Mint Refresh',    category: 'Tropical Juice',     image: 'https://images.unsplash.com/photo-1589733955941-5eeaf752f6dd?w=800&q=80',          image_url: '', status: 'Export Ready',
-    description: 'Hydrating, light-bodied watermelon juice with cool Ugandan spearmint — ideal for wellness and sports markets globally.' },
-  { id: 25, name: 'Lemongrass Lime Tonic',      category: 'Tropical Juice',     image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&q=80',             image_url: '', status: 'Export Ready',
-    description: 'A sophisticated tonic of lemongrass, lime, and raw honey — crafted for premium hospitality and wellness brands.' },
-  // Fresh Produce
-  { id: 8,  name: 'Organic Hass Avocado',       category: 'Fresh Produce',      image: 'https://images.unsplash.com/photo-1601039641847-7857b994d704?w=800&q=80',         image_url: '', status: 'Export Ready',
-    description: 'Premium Ugandan Hass avocados grown in rich volcanic soil for superior oil content and creamy international quality.' },
-  { id: 9,  name: 'Ugandan Bird\'s Eye Chili',  category: 'Fresh Produce',      image: 'https://images.unsplash.com/photo-1588253518678-8386ba932470?w=800&q=80',         image_url: '', status: 'Export Ready',
-    description: 'Extremely potent Bird\'s Eye chilies, hand-picked and sun-dried for consistent heat required by global spice masters.' },
-  { id: 10, name: 'Premium Matooke',            category: 'Fresh Produce',      image: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?w=800&q=80',         image_url: '', status: 'Export Ready', heritage: true,
-    description: 'The backbone of Ugandan nutrition. Organically grown, export-grade green bananas harvested with clinical precision.' },
-  { id: 12, name: 'Fresh Dragon Fruit',         category: 'Fresh Produce',      image: 'https://images.unsplash.com/photo-1527325241027-1e828a42e574?w=800&q=80',         image_url: '', status: 'Export Ready', featured: true,
-    description: 'Exotic, hand-pollinated dragon fruit grown in specialized Ugandan farms for ultra-premium global fruit markets.' },
-  { id: 26, name: 'Fresh MD2 Pineapple',        category: 'Fresh Produce',      image: 'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=800&q=80',            image_url: '', status: 'Export Ready',
-    description: 'Export-grade MD2 pineapples — the sweetest, most globally demanded variety, harvested at peak Brix levels.' },
-  { id: 27, name: 'Organic Passion Fruit',      category: 'Fresh Produce',      image: 'https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=800&q=80',         image_url: '', status: 'Export Ready',
-    description: 'Fresh whole passion fruits packed for export — hand-selected for optimal aroma, acidity and uniform appearance.' },
-  { id: 28, name: 'Ugandan Robusta Coffee',     category: 'Fresh Produce',      image: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&q=80',         image_url: '', status: 'Export Ready', heritage: true,
-    description: 'Uganda\'s world-famous Robusta coffee — bold, earthy, and rich. Sourced from the Mount Elgon highland farms.' },
-]
-
 const ProductBlob = ({ color, size, delay, x, y }: { color: string, size: string, delay: number, x: string, y: string }) => (
   <motion.div
     animate={{ 
@@ -125,7 +61,7 @@ const ProductBlob = ({ color, size, delay, x, y }: { color: string, size: string
 
 export default function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState('All')
-  const [productList, setProductList] = useState(fallbackProducts)
+  const [productList, setProductList] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedProduct, setSelectedProduct] = useState<any>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -150,12 +86,8 @@ export default function ProductsPage() {
     async function fetchProducts() {
       setLoading(true)
       const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false })
-      if (!error && data && data.length > 0 && isMounted) {
-        // Merge: Supabase products take priority by ID,
-        // but always include fallback products not yet in the database
-        const dbIds = new Set(data.map((p: any) => p.id))
-        const localOnly = fallbackProducts.filter(p => !dbIds.has(p.id))
-        setProductList([...data, ...localOnly])
+      if (!error && data && isMounted) {
+        setProductList(data)
       }
       if (isMounted) setLoading(false)
     }
@@ -389,10 +321,11 @@ export default function ProductsPage() {
                       <motion.img 
                           whileHover={{ scale: 1.12, rotate: 4 }}
                           transition={{ duration: 0.7, ease: [0.16,1,0.3,1] }}
-                          src={product.image_url || product.image || 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&q=400'} 
+                          src={product.image_url || product.image || '/images/nectar.png'} 
                           alt={product.name}
                           loading="lazy"
                           decoding="async"
+                          onLoad={(e) => (e.target as HTMLImageElement).classList.add('loaded')}
                           style={{ 
                             width: '180px',
                             height: '180px',
@@ -410,7 +343,7 @@ export default function ProductsPage() {
                     <div className="card-scurve-content">
                       <span style={{ fontSize: '0.8rem', color: 'var(--primary-dark)', fontWeight: '950', textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: '1.2rem', display: 'block' }}>{product.category}</span>
                       <h3 className="text-truncate-1" style={{ fontSize: 'var(--h3-size)', fontWeight: '950', color: 'var(--secondary)', marginBottom: '1.5rem', lineHeight: '1.1', letterSpacing: '-0.03em', minHeight: '2.2em', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{product.name}</h3>
-                      <p className="text-truncate-3" style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '2.8rem', fontWeight: '450', minHeight: '5.1rem' }}>Sustainable harvest, hand-pressed for global quality and natural purity. Delivered with clinical precision to the world.</p>
+                      <p className="text-truncate-3" style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '2.8rem', fontWeight: '450', minHeight: '5.1rem' }}>{product.description || 'No description available for this product.'}</p>
                       
                       <div style={{ marginTop: 'auto' }}>
                         <button 

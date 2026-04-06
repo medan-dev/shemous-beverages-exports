@@ -62,7 +62,7 @@ export default function LeadsClient() {
     // ── Supabase Realtime subscription ─────────────────────────────────────
     const channel = supabase
       .channel('admin-leads-realtime')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'leads' }, (payload) => {
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'leads' }, (payload: any) => {
         fetchLeads()
         if (payload.new && (payload.new as any).id) {
           setFlashId((payload.new as any).id)
@@ -128,8 +128,8 @@ export default function LeadsClient() {
       <header style={{ marginBottom: 'clamp(1.5rem, 4vw, 3rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
            <Link href="/admin/dashboard" style={{ color: 'var(--primary)', fontSize: '0.82rem', fontWeight: '800', textDecoration: 'none', display: 'block', marginBottom: '0.5rem' }}>← Dashboard</Link>
-           <h1 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: '950', color: 'var(--secondary)', margin: 0 }}>Inquiry Hub</h1>
-           <p style={{ color: 'var(--text-muted)', marginTop: '0.2rem' }}>Global B2B contact pipeline and exports inquiries.</p>
+           <h1 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: '950', color: 'var(--secondary)', margin: 0 }}>Messages & Inquiries</h1>
+           <p style={{ color: 'var(--text-muted)', marginTop: '0.2rem' }}>All incoming messages from the contact and export pages.</p>
         </div>
       </header>
 

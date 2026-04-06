@@ -35,7 +35,7 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
     { name: 'Dashboard', href: '/admin/dashboard', icon: <LayoutDashboard size={20} /> },
     { name: 'Products', href: '/admin/products', icon: <ShoppingBag size={20} /> },
     { name: 'Orders', href: '/admin/orders', icon: <Package size={20} /> },
-    { name: 'Leads', href: '/admin/leads', icon: <Users size={20} /> },
+    { name: 'Messages', href: '/admin/leads', icon: <Users size={20} /> }, // Using Users to represent contacts, but renamed to Messages
     { name: 'Logistics', href: '/admin/shipments', icon: <Truck size={20} /> },
     { name: 'Analytics', href: '/admin/analytics', icon: <BarChart3 size={20} /> },
     { name: 'Blog', href: '/admin/blog', icon: <MessageSquare size={20} /> },

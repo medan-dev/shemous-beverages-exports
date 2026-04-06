@@ -60,7 +60,6 @@ export default function Home() {
 
       {/* ── SECTION 1: NATURE REFINED ─────────────────────────── */}
       <section style={{ padding: 'var(--section-padding-top) 0 var(--section-padding-bottom) 0', backgroundColor: 'transparent', position: 'relative' }}>
-        <CurvedDivider color="white" position="top" height="150px" />
         <div className="container" suppressHydrationWarning>
 
           {/* Intro card */}

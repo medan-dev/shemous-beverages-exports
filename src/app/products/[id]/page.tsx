@@ -108,12 +108,12 @@ export default function ProductDetailPage({ params }: { params: any }) {
         const localFallback = fallbackProducts.find(p => p.id.toString() === id.toString())
 
         if (!error && data) {
-          // Merge: prefer Supabase fields, but fill in image/desc from local fallback if missing
+          // Merge: Database always takes precedence
           setProduct({
-            ...localFallback,      // local defaults (image, desc)
-            ...data,               // Supabase overrides most fields
-            image: data.image_url || data.image || localFallback?.image,
-            desc:  data.description || data.desc || localFallback?.desc,
+            ...localFallback,      // local defaults (icons, etc)
+            ...data,               // Supabase overrides core fields
+            image: data.image_url || data.image || localFallback?.image || '/images/nectar.png',
+            desc:  data.description || data.desc || localFallback?.desc || 'No description available for this product.',
           })
         } else {
           setProduct(localFallback || fallbackProducts[0])
