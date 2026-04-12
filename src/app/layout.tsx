@@ -39,14 +39,18 @@ export const metadata: Metadata = {
     siteName: 'Shemous Beverages',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&q=800',
+        url: 'https://shemous.co.ug/images/shemous_logo_master_transparent.png',
         width: 1200,
         height: 630,
-        alt: 'Shemous Premium Organic Masterpieces',
+        alt: 'Shemous Beverages & Exports Official Logo',
       },
     ],
     locale: 'en_US',
     type: 'website',
+  },
+  icons: {
+    icon: '/images/shemous_logo_master_transparent.png',
+    apple: '/images/shemous_logo_master_transparent.png',
   },
 }
 

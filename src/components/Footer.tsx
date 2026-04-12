@@ -64,7 +64,7 @@ export default function Footer() {
           {/* Quick Links: Serious hierarchy, compressed spacing */}
           <div>
             <h4 style={{ color: 'var(--primary)', marginBottom: '1.2rem', fontSize: '0.8rem', fontWeight: '950', textTransform: 'uppercase', letterSpacing: '0.15em' }}>Quick Links</h4>
-             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.6rem', alignItems: 'center' }}>
+             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem', alignItems: 'center' }}>
                <li><Link href="/products" className="btn-hover" style={{ color: 'rgba(255, 255, 255, 0.85)', textDecoration: 'none', fontWeight: '950', fontSize: '1rem', display: 'block' }}>Products</Link></li>
                <li><Link href="/export" className="btn-hover" style={{ color: 'rgba(255, 255, 255, 0.85)', textDecoration: 'none', fontWeight: '950', fontSize: '1rem', display: 'block' }}>Export</Link></li>
                <li><Link href="/about" className="btn-hover" style={{ color: 'rgba(255, 255, 255, 0.85)', textDecoration: 'none', fontWeight: '950', fontSize: '1rem', display: 'block' }}>About Us</Link></li>
@@ -73,18 +73,18 @@ export default function Footer() {
           </div>
 
           {/* Contact: Precise details, compressed grid */}
-          <div>
-            <h4 style={{ color: 'var(--primary)', marginBottom: '1.2rem', fontSize: '0.8rem', fontWeight: '950', textTransform: 'uppercase', letterSpacing: '0.15em' }}>Contact</h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem', alignItems: 'center' }}>
-              <li style={{ display: 'flex', gap: '0.7rem', alignItems: 'flex-start' }}>
-                <MapPin size={16} color="var(--primary)" style={{ marginTop: '0.15rem' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', width: '100%' }}>
+            <h4 style={{ color: 'var(--primary)', marginBottom: '1.2rem', fontSize: '0.8rem', fontWeight: '950', textTransform: 'uppercase', letterSpacing: '0.15em', width: '100%' }}>Contact</h4>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.8rem', alignItems: 'center', width: '100%' }}>
+              <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                <MapPin size={16} color="var(--primary)" />
                 <span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.85rem', fontWeight: '500' }}>Plot 12, Ind. Area, Kampala</span>
               </li>
-              <li style={{ display: 'flex', gap: '0.7rem', alignItems: 'center' }}>
+              <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                 <Phone size={16} color="var(--primary)" />
                 <span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.85rem', fontWeight: '500' }}>+256 705 436 657</span>
               </li>
-              <li style={{ display: 'flex', gap: '0.7rem', alignItems: 'center' }}>
+              <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                 <Mail size={16} color="var(--primary)" />
                 <span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.85rem', fontWeight: '500' }}>export@shemous.co.ug</span>
               </li>
