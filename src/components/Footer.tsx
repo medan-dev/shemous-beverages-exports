@@ -94,7 +94,7 @@ export default function Footer() {
 
         {/* Compressed Footer Base */}
         <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.05)', paddingTop: '1rem', textAlign: 'center', fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.4)', fontWeight: '500', letterSpacing: '0.05em' }}>
-          &copy; {currentYear} Shemous Beverages & Exports.
+          &copy; {currentYear} Shemous Beverages & Exports. <span style={{ opacity: 0.6 }}>|</span> Developed professionally by <a href="https://medan-dev.github.io/Mctech-hub-Systems/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', fontWeight: '800', textDecoration: 'none' }}>Mctech-hub Systems</a>.
         </div>
       </div>
     </footer>

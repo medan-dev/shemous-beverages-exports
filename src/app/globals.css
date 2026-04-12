@@ -563,8 +563,8 @@ html, body {
 
   /* Scale product images on tablet */
   .product-export-image {
-    width: 150px !important;
-    height: 150px !important;
+    width: 180px !important;
+    height: 180px !important;
   }
 
   /* Products grid single column */
@@ -612,8 +612,8 @@ html, body {
 
   /* Scale product images smaller on phones */
   .product-export-image {
-    width: 120px !important;
-    height: 120px !important;
+    width: 150px !important;
+    height: 150px !important;
     border-width: 4px !important;
   }
 

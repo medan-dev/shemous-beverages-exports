@@ -60,6 +60,7 @@ const ShemousHeader = () => {
                style={{ height: 'clamp(100px, 15vh, 150px)', display: 'flex', alignItems: 'center' }}
              >
                 <img 
+                  className="logo-img"
                   src="/images/shemous_logo_master_transparent.png" 
                   alt="Shemous Beverages & Exports" 
                   // Scaled to overcome any potential built-in PNG padding
@@ -110,7 +111,7 @@ const ShemousHeader = () => {
              <ChevronDown size={14} />
           </div>
           
-          <Link href="/export" className="btn-hover hide-mobile" style={{ 
+          <Link href="/export" className="btn-hover shop-now-btn" style={{ 
             padding: '0.6rem 1.4rem', 
             background: 'var(--primary)', 
             color: 'var(--secondary)', 
@@ -120,7 +121,8 @@ const ShemousHeader = () => {
             textTransform: 'uppercase',
             letterSpacing: '0.1em',
             textDecoration: 'none',
-            display: 'inline-block'
+            display: 'inline-block',
+            whiteSpace: 'nowrap'
           }}>
             Shop Now
           </Link>
@@ -162,46 +164,64 @@ const ShemousHeader = () => {
       <AnimatePresence>
         {isOpen && (
            <motion.div
-             initial={{ opacity: 0, x: '100%' }}
-             animate={{ opacity: 1, x: 0 }}
-             exit={{ opacity: 0, x: '100%' }}
-             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+             initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+             animate={{ opacity: 1, backdropFilter: 'blur(20px)' }}
+             exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+             transition={{ duration: 0.4 }}
              style={{
                 position: 'fixed',
                 inset: 0,
-                background: 'linear-gradient(to bottom, var(--secondary), #002D26)',
+                background: 'rgba(0, 45, 38, 0.95)',
                 zIndex: 90,
-                padding: '160px 2rem 2rem',
+                padding: 'clamp(120px, 15vh, 160px) 2rem 3rem',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '2rem'
+                gap: '1.5rem',
+                overflowY: 'auto'
              }}
            >
-             {navItems.map((item, i) => (
-               <motion.div
-                 key={item.name}
-                 initial={{ opacity: 0, x: 20 }}
-                 animate={{ opacity: 1, x: 0 }}
-                 transition={{ delay: 0.1 * i }}
-               >
-                 <Link 
-                   href={item.href}
-                   style={{ 
-                     fontSize: '2.5rem', 
-                     fontWeight: '950', 
-                     color: 'white', 
-                     textDecoration: 'none',
-                     letterSpacing: '-0.02em'
-                   }}
-                 >
-                   {item.name}
-                 </Link>
-               </motion.div>
-             ))}
+             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%', maxWidth: '400px', margin: '0 auto' }}>
+               {navItems.map((item, i) => {
+                 const isActive = pathname === item.href
+                 return (
+                   <motion.div
+                     key={item.name}
+                     initial={{ opacity: 0, y: 20 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     transition={{ delay: 0.1 * i, type: 'spring', stiffness: 100 }}
+                     style={{ width: '100%' }}
+                   >
+                     <Link 
+                       href={item.href}
+                       onClick={() => setIsOpen(false)}
+                       style={{ 
+                         display: 'flex',
+                         alignItems: 'center',
+                         justifyContent: 'space-between',
+                         fontSize: '1.75rem', 
+                         fontWeight: isActive ? '950' : '800', 
+                         color: isActive ? 'var(--primary)' : 'white', 
+                         opacity: isActive ? 1 : 0.8,
+                         textDecoration: 'none',
+                         letterSpacing: '-0.01em',
+                         padding: '1rem 0',
+                         borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+                         transition: 'all 0.3s ease'
+                       }}
+                     >
+                       <span>{item.name}</span>
+                       <span style={{ fontSize: '1rem', opacity: isActive ? 1 : 0.2 }}>
+                         →
+                       </span>
+                     </Link>
+                   </motion.div>
+                 )
+               })}
+             </div>
              
-             <div style={{ marginTop: 'auto', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-                <p style={{ color: 'rgba(255,255,255,0.6)', fontWeight: '700', marginBottom: '1.5rem', fontSize: '0.9rem' }}>GLOBAL LOGISTICS</p>
-                <Link href="/export" style={{ display: 'block', padding: '1.25rem', background: 'var(--primary)', color: 'var(--secondary)', borderRadius: '20px', textAlign: 'center', fontWeight: '950', textDecoration: 'none' }}>
+             <div style={{ marginTop: 'auto', paddingTop: '3rem', width: '100%', maxWidth: '400px', margin: 'auto auto 0 auto' }}>
+                <p style={{ color: 'rgba(255,255,255,0.5)', fontWeight: '700', marginBottom: '1rem', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', textAlign: 'center' }}>Global Logistics</p>
+                <Link href="/export" onClick={() => setIsOpen(false)} style={{ display: 'block', padding: '1.2rem', background: 'var(--primary)', color: 'var(--secondary)', borderRadius: '16px', textAlign: 'center', fontWeight: '950', fontSize: '1rem', textDecoration: 'none', boxShadow: '0 10px 30px rgba(255, 183, 3, 0.15)' }}>
                    Start Export Inquiry
                 </Link>
              </div>
@@ -218,11 +238,19 @@ const ShemousHeader = () => {
         .desktop-nav { display: flex; }
         .show-mobile-flex { display: none; }
         .hide-mobile { display: flex; }
+        .shop-now-btn { margin-left: 0; }
 
         @media (max-width: 992px) {
            .desktop-nav { display: none !important; }
            .show-mobile-flex { display: flex !important; }
            .hide-mobile { display: none !important; }
+           .shop-now-btn { margin-left: 1rem; font-size: 0.65rem !important; padding: 0.5rem 1rem !important; }
+           .logo-img { transform: scale(1.2) !important; }
+        }
+
+        @media (max-width: 480px) {
+           .shop-now-btn { font-size: 0.6rem !important; padding: 0.45rem 0.8rem !important; margin-left: 0.5rem; }
+           .logo-img { transform: scale(1.0) !important; }
         }
       `}</style>
     </div>

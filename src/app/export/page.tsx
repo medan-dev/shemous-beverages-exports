@@ -155,8 +155,8 @@ export default function ExportPage() {
                             onLoad={(e) => (e.target as HTMLImageElement).classList.add('loaded')}
                             onError={(e) => { (e.target as HTMLImageElement).src = '/images/nectar.png'; (e.target as HTMLImageElement).classList.add('loaded'); }}
                             style={{ 
-                              width: '180px',
-                              height: '180px',
+                              width: '280px',
+                              height: '280px',
                               borderRadius: '50%',
                               objectFit: 'cover',
                               zIndex: 2,

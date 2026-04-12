@@ -58,6 +58,15 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://pnqirvkijktqjjzwcjod.supabase.co" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://pnqirvkijktqjjzwcjod.supabase.co" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Lightspeed Preloads for critical Above-The-Fold assets */}
+        <link rel="preload" href="/images/shemous_logo_master_transparent.png" as="image" />
+        <link rel="preload" href="/videos/Create_cinematic_realistic_202604040302.mp4" as="video" type="video/mp4" />
+      </head>
       <body className={`${inter.variable} ${outfit.variable} ${cormorant.variable} ${gochiHand.variable}`} style={{ backgroundColor: 'var(--background)' }} suppressHydrationWarning>
         <div className="noise-overlay" />
         <ClientLayout>
