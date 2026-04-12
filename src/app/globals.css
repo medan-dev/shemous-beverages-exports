@@ -543,19 +543,28 @@ html, body {
   /* Scurve cards mobile adjustments */
   .shemous-scurve-card {
     border-radius: 30px !important;
-    min-height: 480px !important;
+    min-height: auto !important;
+    overflow: visible !important;
   }
 
   .card-scurve-header {
-    height: 200px !important;
+    height: 260px !important;
+    overflow: visible !important;
   }
 
   .card-scurve-content {
-    padding: 3rem 2rem 4rem 2rem !important;
+    padding: 3rem 2rem 3rem 2rem !important;
+    margin-top: -30px !important;
   }
 
   .scurve-bg-fix {
-    height: 240px !important;
+    height: 300px !important;
+  }
+
+  /* Scale product images on tablet */
+  .product-export-image {
+    width: 150px !important;
+    height: 150px !important;
   }
 
   /* Products grid single column */
@@ -578,7 +587,8 @@ html, body {
 
   .shemous-scurve-card {
     border-radius: 24px !important;
-    min-height: 420px !important;
+    min-height: auto !important;
+    overflow: visible !important;
   }
 
   .shemous-scurve-card:hover {
@@ -586,12 +596,25 @@ html, body {
   }
 
   .card-scurve-header {
-    height: 180px !important;
+    height: 240px !important;
+    overflow: visible !important;
   }
 
   .card-scurve-content {
-    padding: 2.5rem 1.5rem 3rem 1.5rem !important;
+    padding: 2.5rem 1.5rem 2.5rem 1.5rem !important;
     border-top-left-radius: 60px !important;
+    margin-top: -25px !important;
+  }
+
+  .scurve-bg-fix {
+    height: 280px !important;
+  }
+
+  /* Scale product images smaller on phones */
+  .product-export-image {
+    width: 120px !important;
+    height: 120px !important;
+    border-width: 4px !important;
   }
 
   .glass-card-organic {
