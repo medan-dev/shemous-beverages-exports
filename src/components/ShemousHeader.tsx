@@ -29,7 +29,7 @@ const ShemousHeader = () => {
   ]
 
   return (
-    <div style={{ position: 'relative', zIndex: 100 }}>
+    <div style={{ position: 'relative', zIndex: 100 }} suppressHydrationWarning>
       {/* MASTERPIECE HEADER */}
       <motion.header 
         style={{ 

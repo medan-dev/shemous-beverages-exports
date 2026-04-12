@@ -72,7 +72,8 @@ export default function ExportPage() {
       padding: 'var(--section-padding-top) 0 var(--section-padding-bottom) 0',
       position: 'relative',
       overflow: 'hidden'
-    }}>
+    }}
+    suppressHydrationWarning>
       <style jsx global>{`
         .text-truncate-1 {
           display: -webkit-box;

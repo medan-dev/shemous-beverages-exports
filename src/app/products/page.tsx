@@ -110,7 +110,13 @@ export default function ProductsPage() {
     : productList.filter(p => p.category === activeCategory)
 
   return (
-    <div style={{ backgroundColor: 'transparent', minHeight: '100vh', padding: 'var(--section-padding-top) 0 var(--section-padding-bottom) 0', position: 'relative', overflow: 'hidden' }}>
+    <div style={{ 
+      backgroundColor: 'transparent', 
+      minHeight: '100vh', 
+      padding: 'var(--section-padding-top) 0 var(--section-padding-bottom) 0',
+      position: 'relative',
+      overflow: 'hidden'
+    }} suppressHydrationWarning>
       <style jsx global>{`
         .text-truncate-1 {
           display: -webkit-box;
