@@ -1,50 +1,48 @@
 'use client'
 
-import { useState } from 'react'
-import { Send, Globe, Package, CheckCircle } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { Globe, Package, CheckCircle, MessageCircle, Leaf, Loader2 } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
+import WhatsAppOrderModal from '@/components/WhatsAppOrderModal'
 import { supabase } from '@/lib/supabase'
 
 export default function ExportPage() {
-  const [loading, setLoading] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
+  const [exportProducts, setExportProducts] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [selectedProduct, setSelectedProduct] = useState<any>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setLoading(true)
-    
-    const formData = new FormData(e.currentTarget)
-    const data = {
-      full_name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      phone: formData.get('phone') as string,
-      company_name: formData.get('company') as string,
-      country: formData.get('country') as string,
-      message: formData.get('message') as string,
-      type: 'export',
+  useEffect(() => {
+    let isMounted = true
+
+    async function fetchExportProducts() {
+      setLoading(true)
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .contains('metadata', { is_export: true })
+        .order('created_at', { ascending: false })
+      if (!error && data && isMounted) {
+        setExportProducts(data)
+      }
+      if (isMounted) setLoading(false)
     }
 
-    let text = `Hello Shemous! I'm submitting an Export Partnership Inquiry:\n\n`
-    text += `*Name:* ${data.full_name}\n`
-    if (data.company_name) text += `*Company:* ${data.company_name}\n`
-    if (data.email) text += `*Email:* ${data.email}\n`
-    if (data.phone) text += `*Phone:* ${data.phone}\n`
-    text += `*Target Market:* ${data.country}\n\n`
-    text += `*Scope & Volume Request:*\n${data.message}\n`
+    fetchExportProducts()
 
-    const waUrl = `https://wa.me/256705436657?text=${encodeURIComponent(text)}`
+    const channel = supabase
+      .channel('public-exports-realtime')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, () => {
+        fetchExportProducts()
+      })
+      .subscribe()
 
-    const { error } = await supabase.from('leads').insert([data])
-
-    setLoading(false)
-    if (!error) {
-      setSubmitted(true)
-      window.open(waUrl, '_blank')
-    } else {
-      setSubmitted(true)
-      window.open(waUrl, '_blank')
+    return () => {
+      isMounted = false
+      supabase.removeChannel(channel)
     }
-  }
+  }, [])
 
   // Animation variants
   const containerVars = {
@@ -75,6 +73,28 @@ export default function ExportPage() {
       position: 'relative',
       overflow: 'hidden'
     }}>
+      <style jsx global>{`
+        .text-truncate-1 {
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .text-truncate-3 {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .product-export-image:hover {
+          transform: scale(1.12) rotate(4deg);
+        }
+      `}</style>
+      
       {/* Decorative Blob */}
       <div style={{
         position: 'absolute',
@@ -95,211 +115,116 @@ export default function ExportPage() {
           initial="hidden"
           animate="visible"
         >
-          {/* Centered Hero Header */}
-          <motion.div variants={itemVars} style={{ textAlign: 'center', maxWidth: '950px', margin: `0 auto var(--content-gap) auto` }}>
-            <div style={{ marginBottom: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}>
-              <div style={{ width: '40px', height: '2px', background: 'var(--primary)' }} />
-              <span style={{ color: 'var(--secondary)', fontWeight: '800', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.3em' }}>
-                Global Partnerships
-              </span>
-              <div style={{ width: '40px', height: '2px', background: 'var(--primary)' }} />
+
+          {/* Export Products Showcase Section */}
+          <motion.div variants={itemVars}>
+            <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', marginBottom: '1.2rem', color: 'var(--primary)' }}>
+                   <Leaf size={24} />
+               </div>
+               <h2 style={{ fontSize: '2.5rem', fontWeight: '950', color: 'var(--secondary)', marginBottom: '1rem' }}>Fresh Produce Exports</h2>
+               <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}>Discover our premium selection of raw fruits and organic produce, certified for international export.</p>
             </div>
-            
-            <h1 style={{ 
-              fontSize: 'var(--h1-size)', 
-              fontWeight: '950', 
-              color: 'var(--secondary)', 
-              lineHeight: '0.95',
-              letterSpacing: '-0.04em',
-              marginBottom: '3.5rem'
-            }}>
-              Exporting the <span className="text-gradient-gold">Spirit</span> of Uganda.
-            </h1>
-            
-            <p style={{ 
-              color: 'var(--text-muted)', 
-              fontSize: '1.4rem', 
-              lineHeight: '1.8', 
-              fontWeight: '450',
-              margin: '0 auto',
-              maxWidth: '800px'
-            }}>
-              From the heart of East Africa to the world's most discerning markets. We specialize in the global distribution of premium beverages and agricultural masterpieces.
-            </p>
-          </motion.div>
 
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
-            gap: '6rem', 
-            alignItems: 'start' 
-          }}>
-            {/* Left Content: Features */}
-            <motion.div variants={itemVars} style={{ display: 'grid', gap: '3rem', paddingTop: '2rem' }}>
-              <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
-                <div style={{ 
-                  width: '72px', 
-                  height: '72px', 
-                  background: 'white', 
-                  borderRadius: '24px', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center',
-                  boxShadow: '0 15px 35px rgba(0, 45, 38, 0.08)',
-                  flexShrink: 0,
-                  color: 'var(--primary)'
-                }}><Globe size={32} strokeWidth={2.5} /></div>
-                <div>
-                  <h4 style={{ fontWeight: '900', color: 'var(--secondary)', fontSize: '1.3rem', marginBottom: '0.6rem' }}>Global Reach</h4>
-                  <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', fontWeight: '500', lineHeight: '1.6' }}>Active distribution channels across 4 continents with integrated logistics.</p>
-                </div>
+            {loading ? (
+              <div style={{ display: 'flex', justifyContent: 'center', padding: '10rem 0' }}>
+                <Loader2 className="animate-spin" size={60} color="var(--primary)" />
               </div>
-              
-              <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
-                <div style={{ 
-                  width: '72px', 
-                  height: '72px', 
-                  background: 'white', 
-                  borderRadius: '24px', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center',
-                  boxShadow: '0 15px 35px rgba(0, 45, 38, 0.08)',
-                  flexShrink: 0,
-                  color: 'var(--primary)'
-                }}><Package size={32} strokeWidth={2.5} /></div>
-                <div>
-                  <h4 style={{ fontWeight: '900', color: 'var(--secondary)', fontSize: '1.3rem', marginBottom: '0.6rem' }}>Bespoke Solutions</h4>
-                  <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', fontWeight: '500', lineHeight: '1.6' }}>Private label configurations and custom volume scaling for international partners.</p>
-                </div>
+            ) : exportProducts.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '5rem 0', color: 'var(--text-muted)' }}>
+                <p>No export products available at this time.</p>
               </div>
-
-              <div className="liquid-card-organic" style={{ padding: '3.5rem', marginTop: '1rem', background: 'var(--secondary)', color: 'white' }}>
-                 <h4 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '1.5rem' }}>Quality Assurance</h4>
-                 <p style={{ opacity: 0.8, lineHeight: '1.7', fontSize: '1rem' }}>
-                    Every batch undergoes clinical-grade testing to ensure 100% organic compliance and taste consistency for the global market.
-                 </p>
-              </div>
-            </motion.div>
-
-            {/* Right Content: Inquiry Form Card */}
-            <motion.div variants={itemVars} className="glass-card-organic" style={{ position: 'relative' }}>
-              <div style={{ 
-                position: 'absolute', 
-                top: '-25px', 
-                right: '-25px', 
-                width: '100px', 
-                height: '100px', 
-                background: 'var(--primary)', 
-                borderRadius: '40% 60% 60% 40% / 40% 40% 60% 60%',
-                zIndex: -1,
-                opacity: 0.15,
-                filter: 'blur(10px)'
-              }} />
-
-              {submitted ? (
-                <div style={{ textAlign: 'center', padding: '4rem 0' }}>
-                  <motion.div 
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    style={{ 
-                      width: '120px', 
-                      height: '120px', 
-                      background: 'var(--primary)', 
-                      borderRadius: '50%', 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'center', 
-                      margin: '0 auto 3rem', 
-                      color: 'var(--secondary)',
-                      boxShadow: '0 25px 50px rgba(255, 183, 3, 0.4)'
-                    }}
+            ) : (
+              <div className="products-grid">
+                {exportProducts.map((product, i) => (
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
+                    whileHover={{ y: -10, transition: { type: 'spring', stiffness: 260, damping: 20 } }}
+                    key={product.id}
                   >
-                    <CheckCircle size={60} />
+                    <div className="shemous-scurve-card" style={{ height: '100%', cursor: 'default' }}>
+                      <div className="scurve-bg-fix" />
+                      <div className="card-scurve-header">
+                        <img 
+                            className="product-export-image"
+                            src={product.image_url || product.image || '/images/nectar.png'} 
+                            alt={product.name}
+                            loading="lazy"
+                            onLoad={(e) => (e.target as HTMLImageElement).classList.add('loaded')}
+                            onError={(e) => { (e.target as HTMLImageElement).src = '/images/nectar.png'; (e.target as HTMLImageElement).classList.add('loaded'); }}
+                            style={{ 
+                              width: '180px',
+                              height: '180px',
+                              borderRadius: '50%',
+                              objectFit: 'cover',
+                              zIndex: 2,
+                              filter: 'saturate(1.2) contrast(1.1) drop-shadow(0 20px 40px rgba(0, 45, 38, 0.2))',
+                              border: '6px solid rgba(255,255,255,0.8)',
+                              transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
+                            }}
+                        />
+                      </div>
+
+                      <div className="card-scurve-content">
+                        <span style={{ fontSize: '0.75rem', color: 'var(--primary-dark)', fontWeight: '950', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '1rem', display: 'block' }}>{product.category}</span>
+                        <h3 className="text-truncate-1" style={{ fontSize: '1.4rem', fontWeight: '950', color: 'var(--secondary)', marginBottom: '1rem', lineHeight: '1.2' }}>{product.name}</h3>
+                        <p className="text-truncate-3" style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.6', marginBottom: '2rem' }}>{product.description}</p>
+                        
+                        <div style={{ marginTop: 'auto' }}>
+                          <button 
+                            onClick={(e) => {
+                              e.preventDefault()
+                              setSelectedProduct(product)
+                              setIsModalOpen(true)
+                            }}
+                            className="btn-hover" 
+                            style={{ 
+                              width: '100%',
+                              padding: '1rem', 
+                              background: 'var(--primary)', 
+                              color: 'var(--secondary)', 
+                              border: 'none', 
+                              fontSize: '0.95rem', 
+                              fontWeight: '900', 
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              justifyContent: 'center', 
+                              gap: '0.5rem',
+                              borderRadius: '16px',
+                              cursor: 'pointer'
+                            }}
+                          >
+                              Request Quote <MessageCircle size={18} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </motion.div>
-                  <h3 style={{ fontSize: '2.5rem', fontWeight: '950', color: 'var(--secondary)' }}>Transmission Successful</h3>
-                  <p style={{ color: 'var(--text-muted)', marginTop: '2rem', fontSize: '1.2rem', fontWeight: '500', lineHeight: '1.6', maxWidth: '400px', margin: '2rem auto' }}>
-                    Our international trade specialists are analyzing your scope and will initiate contact within 12 business hours.
-                  </p>
-                  <button 
-                    onClick={() => setSubmitted(false)} 
-                    className="liquid-blob-btn"
-                    style={{ 
-                      marginTop: '3.5rem', 
-                      padding: '1.4rem 4rem', 
-                      background: 'var(--secondary)', 
-                      color: 'white', 
-                      fontWeight: '900', 
-                      border: 'none', 
-                      cursor: 'pointer' 
-                    }}
-                  >
-                    Initialize New Request
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                  <div>
-                    <h3 style={{ fontSize: '2rem', fontWeight: '950', color: 'var(--secondary)', marginBottom: '0.75rem' }}>Partner with Shemous</h3>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: '600', marginBottom: '2.5rem' }}>Securely submit your global beverage requirements.</p>
-                  </div>
-                  
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.8rem' }}>
-                    <div>
-                      <label className="shemous-label">Full Name</label>
-                      <input name="name" required className="shemous-input" placeholder="Primary Contact" />
-                    </div>
-                    <div>
-                      <label className="shemous-label">Organization</label>
-                      <input name="company" className="shemous-input" placeholder="Company Name" />
-                    </div>
-                  </div>
-                  
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.8rem' }}>
-                    <div>
-                      <label className="shemous-label">Corporate Email</label>
-                      <input name="email" type="email" required className="shemous-input" placeholder="name@company.com" />
-                    </div>
-                    <div>
-                      <label className="shemous-label">Target Market</label>
-                      <input name="country" required className="shemous-input" placeholder="Destination Region" />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="shemous-label">Scope & Volume</label>
-                    <textarea name="message" required className="shemous-input" style={{ height: '140px', resize: 'none' }} placeholder="Specify your beverage interests and anticipated volume for the first quarter..."></textarea>
-                  </div>
-
-                  <button 
-                    disabled={loading} 
-                    type="submit" 
-                    className="liquid-blob-btn btn-hover"
-                    style={{ 
-                      backgroundColor: 'var(--primary)', 
-                      color: 'var(--secondary)', 
-                      padding: '1.6rem', 
-                      fontWeight: '950', 
-                      border: 'none', 
-                      cursor: 'pointer', 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'center', 
-                      gap: '1.2rem', 
-                      marginTop: '1rem',
-                      fontSize: '1.1rem'
-                    }}
-                  >
-                    {loading ? 'Processing...' : 'Submit Partnership Inquiry'} <Send size={24} strokeWidth={2.5} />
-                  </button>
-                </form>
-              )}
-            </motion.div>
-          </div>
+                ))}
+              </div>
+            )}
+            
+            <div style={{ textAlign: 'center', marginTop: '4rem' }}>
+              <Link href="/contact" style={{ display: 'inline-block' }}>
+                <button className="liquid-blob-btn btn-hover" style={{ 
+                  padding: '1.4rem 3rem', background: 'var(--secondary)', color: 'white', border: 'none', 
+                  borderRadius: '100px', fontWeight: '900', fontSize: '1.1rem', cursor: 'pointer' 
+                }}>
+                  Start Partnership Inquiry
+                </button>
+              </Link>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
 
+      <WhatsAppOrderModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        product={selectedProduct} 
+      />
     </div>
   )
 }
-

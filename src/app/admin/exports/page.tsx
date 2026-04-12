@@ -22,7 +22,7 @@ type Product = {
   created_at?: string
 }
 
-export default function AdminProducts() {
+export default function AdminExports() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [mounted, setMounted] = useState(false)
@@ -41,7 +41,7 @@ export default function AdminProducts() {
 
   // Form fields
   const [name, setName] = useState('')
-  const [category, setCategory] = useState('Banana Juice')
+  const [category, setCategory] = useState('Fresh Produce')
   const [price, setPrice] = useState('')
   const [stockStatus, setStockStatus] = useState('in_stock')
   const [isFeatured, setIsFeatured] = useState(false)
@@ -51,15 +51,13 @@ export default function AdminProducts() {
 
   useEffect(() => {
     setMounted(true)
-    fetchProducts()
+    fetchExports()
 
     // ── Supabase Realtime subscription ─────────────────────────────────────
-    // Admin panel stays in sync with any DB change automatically
     const channel = supabase
-      .channel('admin-products-realtime')
+      .channel('admin-exports-realtime')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, (payload: any) => {
-        fetchProducts()
-        // Flash the row that changed so admin can see it updated
+        fetchExports()
         if (payload.new && (payload.new as any).id) {
           setFlashId((payload.new as any).id)
           setTimeout(() => setFlashId(null), 2000)
@@ -70,15 +68,15 @@ export default function AdminProducts() {
     return () => { supabase.removeChannel(channel) }
   }, [])
 
-  const fetchProducts = async () => {
-    const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false })
-    if (!error) setProducts((data || []).filter((p: any) => !p.metadata?.is_export))
+  const fetchExports = async () => {
+    const { data, error } = await supabase.from('products').select('*').contains('metadata', {is_export: true}).order('created_at', { ascending: false })
+    if (!error) setProducts(data || [])
     setLoading(false)
   }
 
   const openAddPanel = () => {
     setEditingProduct(null)
-    setName(''); setCategory('Banana Juice'); setPrice('')
+    setName(''); setCategory('Fresh Produce'); setPrice('')
     setStockStatus('in_stock'); setIsFeatured(false); setDescription('')
     setImageFile(null); setImagePreview(null)
     setIsPanelOpen(true)
@@ -137,6 +135,7 @@ export default function AdminProducts() {
     }
 
     const payload: any = {
+      metadata: { is_export: true },
       name: name.trim(), 
       category: category.trim(),
       price: price ? parseFloat(price) : null,
@@ -147,20 +146,15 @@ export default function AdminProducts() {
       updated_at: new Date().toISOString()
     }
 
-    console.log('[AdminProducts] Saving payload:', JSON.stringify(payload, null, 2))
-
     const resultAction = await saveProductAction(payload, editingProduct?.id)
 
     if (resultAction.success) { 
-       console.log('[AdminProducts] Save successful. Updated record:', resultAction.data)
-       fetchProducts() 
+       fetchExports() 
        closePanel() 
     } else { 
-       console.error('[AdminProducts] Save error details:', resultAction.error)
        alert(`Save failed: ${resultAction.error}`) 
     }
     setIsSubmitting(false)
-    // Realtime subscription will auto-refresh the list
   }
 
   const handleConfirmDelete = async () => {
@@ -169,7 +163,6 @@ export default function AdminProducts() {
     await supabase.from('products').delete().eq('id', deleteTarget.id)
     setDeleteTarget(null)
     setIsDeleting(false)
-    // Realtime subscription will auto-refresh
   }
 
   const stockColors: Record<string, { bg: string; color: string }> = {
@@ -182,23 +175,21 @@ export default function AdminProducts() {
     <div style={{ minHeight: '100vh', background: '#F8FAFC' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: 'clamp(1.5rem, 4vw, 4rem) clamp(1rem, 4vw, 2rem)' }}>
 
-        {/* ── Header ────────────────────────────────────── */}
         <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'clamp(1.5rem, 4vw, 3rem)', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
             <Link href="/admin/dashboard" style={{ color: 'var(--primary)', fontSize: '0.85rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.6rem', textDecoration: 'none' }}>
               ← Dashboard
             </Link>
-            <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.5rem)', color: 'var(--secondary)', fontWeight: '950', margin: 0 }}>Products</h1>
+            <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.5rem)', color: 'var(--secondary)', fontWeight: '950', margin: 0 }}>Exports</h1>
             <p style={{ color: 'var(--text-muted)', marginTop: '0.25rem', fontSize: '0.9rem' }}>
               {products.length} listing{products.length !== 1 ? 's' : ''} &bull; <span style={{ color: '#10B981', fontWeight: '700' }}>● Live</span>
             </p>
           </div>
           <button onClick={openAddPanel} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: 'clamp(0.7rem, 2vw, 1rem) clamp(1rem, 3vw, 1.75rem)', background: 'var(--primary)', color: 'var(--secondary)', fontWeight: '900', border: 'none', borderRadius: '100px', cursor: 'pointer', fontSize: 'clamp(0.82rem, 2vw, 0.95rem)', whiteSpace: 'nowrap', boxShadow: '0 8px 24px rgba(255,183,3,0.35)' }}>
-            <Plus size={18} strokeWidth={3} /> Add Product
+            <Plus size={18} strokeWidth={3} /> Add Export Product
           </button>
         </header>
 
-        {/* ── Products: Desktop Table / Mobile Cards ──── */}
         {loading ? (
           <div style={{ textAlign: 'center', padding: '6rem', color: 'var(--text-muted)' }}>
             <Package size={48} style={{ margin: '0 auto 1rem', opacity: 0.3 }} />
@@ -208,18 +199,17 @@ export default function AdminProducts() {
           <div style={{ textAlign: 'center', padding: '6rem 2rem', background: 'white', borderRadius: '24px', border: '1px solid #E5E7EB' }}>
             <Package size={52} style={{ margin: '0 auto 1rem', opacity: 0.25 }} />
             <p style={{ fontWeight: '700', color: 'var(--secondary)', fontSize: '1.1rem' }}>No products yet</p>
-            <p style={{ color: 'var(--text-muted)', marginTop: '0.3rem' }}>Click "Add Product" to create your first listing.</p>
+            <p style={{ color: 'var(--text-muted)', marginTop: '0.3rem' }}>Click "Add Export Product" to create your first listing.</p>
           </div>
         ) : (
           <>
-            {/* Desktop Table (hidden on mobile) */}
             <div style={{ display: 'none' }} className="desktop-table-wrapper">
               <style>{`.desktop-table-wrapper { display: block !important; } @media (max-width: 640px) { .desktop-table-wrapper { display: none !important; } }`}</style>
               <div style={{ background: 'white', borderRadius: '20px', border: '1px solid #E5E7EB', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
                   <thead>
                     <tr style={{ background: '#F8FAFC', borderBottom: '2px solid #E5E7EB' }}>
-                      <th style={{ ...thStyle, width: '35%' }}>Product</th>
+                      <th style={{ ...thStyle, width: '35%' }}>Export Product</th>
                       <th style={{ ...thStyle, width: '18%' }}>Category</th>
                       <th style={{ ...thStyle, width: '12%' }}>Price</th>
                       <th style={{ ...thStyle, width: '15%' }}>Stock</th>
@@ -280,7 +270,6 @@ export default function AdminProducts() {
               </div>
             </div>
 
-            {/* Mobile Cards (visible only on mobile) */}
             <div className="mobile-cards-wrapper">
               <style>{`.mobile-cards-wrapper { display: none; } @media (max-width: 640px) { .mobile-cards-wrapper { display: flex; flex-direction: column; gap: 0.9rem; } }`}</style>
               <AnimatePresence>
@@ -320,7 +309,6 @@ export default function AdminProducts() {
         )}
       </div>
 
-      {/* ── Add / Edit Panel ─────────────────────────────── */}
       <AnimatePresence>
         {isPanelOpen && (
           <>
@@ -331,11 +319,10 @@ export default function AdminProducts() {
               transition={{ type: 'spring', damping: 28, stiffness: 240 }}
               style={{ position: 'fixed', top: 0, right: 0, bottom: 0, width: 'min(100vw, 520px)', background: 'white', zIndex: 201, boxShadow: '-20px 0 80px rgba(0,0,0,0.2)', display: 'flex', flexDirection: 'column', overflowY: 'auto' }}
             >
-              {/* Panel Header */}
               <div style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E5E7EB', flexShrink: 0, position: 'sticky', top: 0, background: 'white', zIndex: 10 }}>
                 <div>
                   <h2 style={{ fontSize: 'clamp(1.2rem, 4vw, 1.6rem)', fontWeight: '950', color: 'var(--secondary)', margin: 0 }}>
-                    {editingProduct ? 'Edit Product' : 'New Product'}
+                    {editingProduct ? 'Edit Export Product' : 'New Export Product'}
                   </h2>
                   {editingProduct && <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>Updating: {editingProduct.name}</p>}
                 </div>
@@ -344,11 +331,9 @@ export default function AdminProducts() {
                 </button>
               </div>
 
-              {/* Form */}
               <form onSubmit={handleSaveProduct} style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem', flexGrow: 1 }}>
-                {/* Image */}
                 <div>
-                  <label style={labelStyle}>Product Image</label>
+                  <label style={labelStyle}>Export Product Image</label>
                   <div style={{ width: '100%', height: '180px', border: '2px dashed #CBD5E1', borderRadius: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden', background: '#F8FAFC', cursor: 'pointer' }}>
                     {imagePreview
                       ? <img src={imagePreview} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -360,7 +345,7 @@ export default function AdminProducts() {
                 </div>
 
                 <div>
-                  <label style={labelStyle}>Product Name *</label>
+                  <label style={labelStyle}>Export Product Name *</label>
                   <input value={name} onChange={e => setName(e.target.value)} required placeholder="e.g. Organic Heritage Nectar" style={inputStyle} />
                 </div>
 
@@ -378,11 +363,7 @@ export default function AdminProducts() {
                   <div>
                     <label style={labelStyle}>Category</label>
                     <select value={category} onChange={e => setCategory(e.target.value)} style={inputStyle}>
-                      <option value="Banana Juice">Banana Juice</option>
-                      <option value="Banana Smoothie">Banana Smoothie</option>
-                      <option value="Banana Milk">Banana Milk</option>
-                      <option value="Dried Banana Chips">Dried Banana Chips</option>
-                      <option value="Tropical Juice">Tropical Juice</option>
+                      <option value="Fresh Produce">Fresh Produce</option><option value="Spices & Roots">Spices & Roots</option>
                     </select>
                   </div>
                   <div>
@@ -408,7 +389,7 @@ export default function AdminProducts() {
                 <div style={{ marginTop: 'auto', paddingTop: '1rem' }}>
                   <button type="submit" disabled={isSubmitting}
                     style={{ width: '100%', padding: '1.1rem', background: editingProduct ? 'var(--secondary)' : 'var(--primary)', color: editingProduct ? 'white' : 'var(--secondary)', fontWeight: '900', fontSize: '0.95rem', border: 'none', borderRadius: '12px', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem', opacity: isSubmitting ? 0.7 : 1, transition: 'opacity 0.2s' }}>
-                    {isSubmitting ? (editingProduct ? 'Saving…' : 'Creating…') : <><CheckCircle size={18} /> {editingProduct ? 'Save Changes' : 'Add Product'}</>}
+                    {isSubmitting ? (editingProduct ? 'Saving…' : 'Creating…') : <><CheckCircle size={18} /> {editingProduct ? 'Save Changes' : 'Add Export Product'}</>}
                   </button>
                 </div>
               </form>
@@ -417,7 +398,6 @@ export default function AdminProducts() {
         )}
       </AnimatePresence>
 
-      {/* ── Delete Confirmation Modal ───────────────────── */}
       {mounted && deleteTarget && createPortal(
         <div style={{ position: 'fixed', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 99999, padding: '1rem' }}>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} onClick={() => setDeleteTarget(null)}
@@ -430,7 +410,7 @@ export default function AdminProducts() {
             <div style={{ width: '60px', height: '60px', background: '#FEE2E2', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.2rem' }}>
               <AlertTriangle size={28} color="#DC2626" />
             </div>
-            <h3 style={{ fontSize: 'clamp(1.1rem, 4vw, 1.4rem)', fontWeight: '950', color: 'var(--secondary)', marginBottom: '0.6rem' }}>Delete Product?</h3>
+            <h3 style={{ fontSize: 'clamp(1.1rem, 4vw, 1.4rem)', fontWeight: '950', color: 'var(--secondary)', marginBottom: '0.6rem' }}>Delete Export Product?</h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1.8rem' }}>
               Permanently delete <strong style={{ color: 'var(--secondary)' }}>{deleteTarget.name}</strong>? This cannot be undone.
             </p>

@@ -34,6 +34,7 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
   const menuItems = [
     { name: 'Dashboard', href: '/admin/dashboard', icon: <LayoutDashboard size={20} /> },
     { name: 'Products', href: '/admin/products', icon: <ShoppingBag size={20} /> },
+    { name: 'Exports', href: '/admin/exports', icon: <Package size={20} /> },
     { name: 'Orders', href: '/admin/orders', icon: <Package size={20} /> },
     { name: 'Messages', href: '/admin/leads', icon: <Users size={20} /> }, // Using Users to represent contacts, but renamed to Messages
     { name: 'Logistics', href: '/admin/shipments', icon: <Truck size={20} /> },
@@ -59,9 +60,14 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
         display: 'flex',
         flexDirection: 'column',
         position: 'fixed',
+        top: 0,
+        left: 0,
+        bottom: 0,
         height: '100vh',
         zIndex: 100,
         boxShadow: '10px 0 50px rgba(0,0,0,0.15)',
+        boxSizing: 'border-box',
+        overflowY: 'auto',
       }} className="desktop-sidebar">
         <style>{`
           .desktop-sidebar { display: flex !important; }

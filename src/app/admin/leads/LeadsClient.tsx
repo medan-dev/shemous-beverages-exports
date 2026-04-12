@@ -287,7 +287,7 @@ export default function LeadsClient() {
 
                   {/* Contact Info */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', background: '#F8FAFC', borderRadius: '24px', padding: '2rem' }}>
-                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1.5rem' }}>
                         <div>
                            <span style={detailLabelStyle}>Email Address</span>
                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginTop: '0.4rem', color: 'var(--secondary)', fontWeight: '700' }}>
@@ -302,7 +302,7 @@ export default function LeadsClient() {
                         </div>
                      </div>
                      
-                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', paddingTop: '1.5rem', borderTop: '1px dashed #E2E8F0' }}>
+                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1.5rem', paddingTop: '1.5rem', borderTop: '1px dashed #E2E8F0' }}>
                         <div>
                            <span style={detailLabelStyle}>Organization</span>
                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginTop: '0.4rem', color: 'var(--secondary)', fontWeight: '700' }}>

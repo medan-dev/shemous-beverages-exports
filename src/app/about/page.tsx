@@ -90,7 +90,7 @@ export default function AboutPage() {
             </ScrollReveal>
             
             <ScrollReveal direction="right">
-              <div style={{ paddingLeft: '2rem' }}>
+              <div style={{ paddingLeft: 'clamp(0rem, 2vw, 2rem)' }}>
                 <span style={{ color: 'var(--primary)', fontWeight: '800', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '2.5rem' }}>Cultural Legacy</span>
                 <h2 style={{ 
                   fontFamily: 'var(--font-serif)', 
@@ -107,13 +107,13 @@ export default function AboutPage() {
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
                    <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)', lineHeight: '1.8', fontWeight: '450' }}>
-                      Omubisi is more than a beverage; it is a sacred ritual of Ugandan hospitality. Our journey begins with the **Juice Banana**, a variety specifically bred for its sweetness, hand-peeled and prepared for extraction in the traditional way.
+                      Omubisi is more than a beverage; it is a sacred ritual of Ugandan hospitality. Our journey begins with the "Juice Banana", a variety specifically bred for its sweetness, hand-peeled and prepared for extraction in the traditional way.
                    </p>
                    <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)', lineHeight: '1.8', fontWeight: '450' }}>
-                      The extraction happens in the **Lyato**—a hand-carved wooden trough—where the fruit is kneaded with **Essubi** (spear grass). This natural filtration captures the raw electricity of the fruit, resulting in a thick, foamy nectar.
+                      The extraction happens in the "Lyato"—a hand-carved wooden trough—where the fruit is kneaded with "Essubi" (spear grass). This natural filtration captures the raw electricity of the fruit, resulting in a thick, foamy nectar.
                    </p>
                    <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)', lineHeight: '1.8', fontWeight: '450' }}>
-                      Traditionally served in a dried gourd known as the **Ndèku**, Omubisi is the heart of every guest's welcome. At Shemous, we bridge this ancient wisdom with modern precision.
+                      Traditionally served in a dried gourd known as the "Ndèku", Omubisi is the heart of every guest's welcome. At Shemous, we bridge this ancient wisdom with modern precision.
                    </p>
                 </div>
               </div>
@@ -135,8 +135,9 @@ export default function AboutPage() {
           </div>
 
           <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+            display: 'flex', 
+            flexWrap: 'wrap',
+            justifyContent: 'center',
             gap: '3.5rem' 
           }}>
             {[
@@ -154,7 +155,9 @@ export default function AboutPage() {
                     display: 'flex', 
                     flexDirection: 'column', 
                     gap: '2.5rem',
-                    textAlign: 'left'
+                    textAlign: 'left',
+                    flex: '1 1 320px',
+                    maxWidth: '420px'
                   }}
                 >
                   <div style={{ 

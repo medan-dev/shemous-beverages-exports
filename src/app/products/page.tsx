@@ -39,10 +39,7 @@ const categories = [
   { name: 'Banana Smoothie', icon: <Zap size={16} /> },
   { name: 'Banana Milk', icon: <Milk size={16} /> },
   { name: 'Dried Banana Chips', icon: <Cookie size={16} /> },
-  { name: 'Ginger', icon: <Flame size={16} /> },
-  { name: 'Pineapple', icon: <Sun size={16} /> },
   { name: 'Tropical Juice', icon: <Droplets size={16} /> },
-  { name: 'Fresh Produce', icon: <Globe size={16} /> },
 ]
 
 
@@ -87,7 +84,7 @@ export default function ProductsPage() {
       setLoading(true)
       const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false })
       if (!error && data && isMounted) {
-        setProductList(data)
+        setProductList(data.filter((p: any) => !p.metadata?.is_export))
       }
       if (isMounted) setLoading(false)
     }
@@ -290,14 +287,9 @@ export default function ProductsPage() {
             <Loader2 className="animate-spin" size={60} color="var(--primary)" />
           </div>
         ) : (
-          <motion.div 
-            layout
-            className="products-grid"
-          >
-          <AnimatePresence mode="popLayout">
+          <div className="products-grid">
             {filteredProducts.map((product) => (
               <motion.div
-                layout
                 variants={itemVariants}
                 initial="hidden"
                 animate="visible"
@@ -318,9 +310,8 @@ export default function ProductsPage() {
                         )}
                       </div>
                       <ProductBlob color="rgba(255, 255, 255, 0.15)" size="220px" delay={0} x="30%" y="-30%" />
-                      <motion.img 
-                          whileHover={{ scale: 1.12, rotate: 4 }}
-                          transition={{ duration: 0.7, ease: [0.16,1,0.3,1] }}
+                      <img 
+                          className="product-export-image"
                           src={product.image_url || product.image || '/images/nectar.png'} 
                           alt={product.name}
                           loading="lazy"
@@ -335,7 +326,8 @@ export default function ProductsPage() {
                             marginTop: '-20px',
                             filter: 'saturate(1.2) contrast(1.1) drop-shadow(0 30px 60px rgba(0, 45, 38, 0.25))',
                             border: '6px solid rgba(255,255,255,0.4)',
-                            boxShadow: '0 0 0 1px rgba(0, 45, 38, 0.1)'
+                            boxShadow: '0 0 0 1px rgba(0, 45, 38, 0.1)',
+                            transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
                           }}
                       />
                     </div>
@@ -380,8 +372,7 @@ export default function ProductsPage() {
                 </Link>
               </motion.div>
             ))}
-          </AnimatePresence>
-          </motion.div>
+          </div>
         )}
       </motion.div>
 

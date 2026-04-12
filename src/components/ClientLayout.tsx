@@ -49,17 +49,21 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       <PageProgress />
       {!isAdminRoute && <ShemousHeader />}
       
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.main
-          key={pathname}
-          variants={pageVariants}
-          initial="initial"
-          animate="enter"
-          exit="exit"
-        >
-          {children}
-        </motion.main>
-      </AnimatePresence>
+      {!isAdminRoute ? (
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.main
+            key={pathname}
+            variants={pageVariants}
+            initial="initial"
+            animate="enter"
+            exit="exit"
+          >
+            {children}
+          </motion.main>
+        </AnimatePresence>
+      ) : (
+        <main>{children}</main>
+      )}
 
       {!isAdminRoute && (
         <>

@@ -40,7 +40,7 @@ export default function AdminBlog() {
         </button>
       </header>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))', gap: '2rem' }}>
         {posts.length === 0 && !loading ? (
              <div className="glass-card" style={{ padding: '4rem', textAlign: 'center', gridColumn: '1 / -1' }}>
                <BookOpen size={48} style={{ opacity: 0.2, marginBottom: '1rem', margin: '0 auto' }} />

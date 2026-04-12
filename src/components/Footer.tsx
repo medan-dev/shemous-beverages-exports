@@ -47,7 +47,7 @@ export default function Footer() {
 
       
       <div className="container" style={{ position: 'relative', zIndex: 10 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2.5rem', marginBottom: '3rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '2.5rem', marginBottom: '3rem' }}>
           {/* Brand Column: Compressed Branding */}
           {/* Brand Column: Sensible spacing without logo */}
           <div>

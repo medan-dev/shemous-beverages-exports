@@ -335,7 +335,7 @@ export default function ShipmentsClient() {
                    <input value={carrier} onChange={e => setCarrier(e.target.value)} required placeholder="e.g. Maersk / Emirates SkyCargo" style={inputStyle} />
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem' }}>
                    <div>
                       <label style={labelStyle}>Origin Port</label>
                       <input value={originPort} onChange={e => setOriginPort(e.target.value)} required placeholder="Kampala / Mombasa" style={inputStyle} />
@@ -346,7 +346,7 @@ export default function ShipmentsClient() {
                    </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem' }}>
                    <div>
                       <label style={labelStyle}>Transit Status</label>
                       <select value={status} onChange={e => setStatus(e.target.value)} style={inputStyle}>

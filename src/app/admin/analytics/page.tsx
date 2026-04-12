@@ -50,7 +50,7 @@ export default async function AnalyticsPage() {
       </header>
 
       {/* Metric Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
         <MetricCard 
            title="Total Revenue" 
            value={`$${totalRevenue.toLocaleString()}`} 
@@ -81,7 +81,7 @@ export default async function AnalyticsPage() {
         />
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.5fr) minmax(0, 1fr)', gap: '2rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))', gap: '2rem' }}>
         {/* Performance Visualization */}
         <div className="liquid-card-organic" style={{ background: 'white', padding: '2.5rem' }}>
            <h3 style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--secondary)', marginBottom: '2rem' }}>Lead Composition</h3>

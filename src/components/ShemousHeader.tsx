@@ -25,6 +25,7 @@ const ShemousHeader = () => {
     { name: 'Products', href: '/products' },
     { name: 'Export', href: '/export' },
     { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' },
   ]
 
   return (

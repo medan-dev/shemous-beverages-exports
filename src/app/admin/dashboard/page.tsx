@@ -60,7 +60,7 @@ export default function AdminDashboard() {
 
   return (
     <div>
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '3rem' }}>
+      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <h1 style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--primary)', marginBottom: '0.25rem' }}>Operations Hub</h1>
           <p style={{ color: 'var(--text-muted)' }}>Real-time overview of your global export business.</p>
@@ -76,14 +76,14 @@ export default function AdminDashboard() {
       </header>
 
       {/* Stats Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
         <StatCard icon={<DollarSign size={20} />} title="Total Revenue" value="$42,850" trend="+18.5%" />
         <StatCard icon={<Truck size={20} />} title="Active Shipments" value="12" trend="3 in transit" />
         <StatCard icon={<Users size={20} />} title="Pending Inquiries" value={stats.leads} trend="Action needed" />
         <StatCard icon={<Globe size={20} />} title="Export Regions" value="14" trend="New: UAE" />
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))', gap: '2rem' }}>
          {/* Export Destinations Donut Chart Mockup */}
          <motion.div whileHover={{ y: -5 }} className="liquid-card-organic" style={{ padding: '2rem', background: 'white' }}>
             <h3 style={{ fontSize: '1.2rem', fontWeight: '950', marginBottom: '2rem', color: 'var(--secondary)' }}>Export Destinations</h3>

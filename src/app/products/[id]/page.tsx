@@ -195,23 +195,27 @@ export default function ProductDetailPage({ params }: { params: any }) {
               >
                 <div className="card-scurve-header" style={{ height: '100%', width: '100%', background: 'transparent' }}>
                   <ProductBlob color="rgba(255, 255, 255, 0.2)" size="100%" delay={0} x="0" y="0" />
-                  <motion.img 
+                  <motion.div
                     initial={{ scale: 0.8 }}
                     animate={{ scale: 1.05 }}
                     transition={{ type: 'spring', stiffness: 100 }}
-                    src={product.image} 
-                    alt={product.name}
-                    style={{ 
-                      width: '80%',
-                      height: '80%',
-                      borderRadius: '50%',
-                      objectFit: 'cover',
-                      filter: 'saturate(1.2) contrast(1.1) drop-shadow(0 40px 100px rgba(0,0,0,0.3))',
-                      border: '10px solid rgba(255,255,255,0.3)',
-                      zIndex: 2,
-                      marginTop: '40px' /* Lowered within the hero circle */
-                    }}
-                  />
+                    style={{ zIndex: 2, marginTop: '40px' }}
+                  >
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      style={{ 
+                        width: '100%',
+                        height: '100%',
+                        maxHeight: '400px',
+                        maxWidth: '400px',
+                        borderRadius: '50%',
+                        objectFit: 'cover',
+                        filter: 'saturate(1.2) contrast(1.1) drop-shadow(0 40px 100px rgba(0,0,0,0.3))',
+                        border: '10px solid rgba(255,255,255,0.3)'
+                      }}
+                    />
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
@@ -321,7 +325,7 @@ export default function ProductDetailPage({ params }: { params: any }) {
               <Link key={item.id} href={`/products/${item.id}`}>
                 <div className="shemous-scurve-card" style={{ height: '380px', minHeight: 'unset' }}>
                   <div className="card-scurve-header" style={{ height: '180px' }}>
-                     <motion.img src={item.image} style={{ width: '120px', height: '120px', borderRadius: '50%', objectFit: 'cover', border: '5px solid rgba(255,255,255,0.3)', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.2))' }} />
+                     <img src={item.image} style={{ width: '120px', height: '120px', borderRadius: '50%', objectFit: 'cover', border: '5px solid rgba(255,255,255,0.3)', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.2))' }} />
                   </div>
                   <div className="card-scurve-content" style={{ marginTop: '-40px', padding: '3rem 2rem' }}>
                     <span style={{ fontSize: '0.65rem', color: 'var(--primary-dark)', fontWeight: '950', textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: '0.5rem', display: 'block' }}>{item.category}</span>

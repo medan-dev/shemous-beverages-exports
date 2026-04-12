@@ -510,3 +510,114 @@ html {
 .img-lazy-fade {
   animation: imageFadeIn 0.5s ease forwards;
 }
+
+/* =========================================
+   MOBILE RESPONSIVE OVERRIDES
+   ========================================= */
+
+/* -- Global overflow protection -- */
+html, body {
+  overflow-x: hidden;
+}
+
+/* -- About page heritage image -- */
+@media (max-width: 768px) {
+  .hero-split-grid {
+    gap: 2rem !important;
+  }
+
+  .liquid-card-organic {
+    padding: 2rem !important;
+    border-radius: 30px 60px 30px 75px / 75px 30px 60px 30px !important;
+  }
+
+  .liquid-card-organic:hover {
+    border-radius: 60px 30px 75px 30px / 30px 75px 30px 60px !important;
+  }
+
+  /* Reduce heritage image height on mobile */
+  .curvy-mask-organic .liquid-card-organic {
+    height: 400px !important;
+  }
+
+  /* Scurve cards mobile adjustments */
+  .shemous-scurve-card {
+    border-radius: 30px !important;
+    min-height: 480px !important;
+  }
+
+  .card-scurve-header {
+    height: 200px !important;
+  }
+
+  .card-scurve-content {
+    padding: 3rem 2rem 4rem 2rem !important;
+  }
+
+  .scurve-bg-fix {
+    height: 240px !important;
+  }
+
+  /* Products grid single column */
+  .products-grid {
+    gap: 2.5rem !important;
+  }
+}
+
+/* -- Small phone screens -- */
+@media (max-width: 480px) {
+  .liquid-card-organic {
+    padding: 1.5rem !important;
+    border-radius: 24px !important;
+  }
+
+  .liquid-card-organic:hover {
+    border-radius: 24px !important;
+    transform: none !important;
+  }
+
+  .shemous-scurve-card {
+    border-radius: 24px !important;
+    min-height: 420px !important;
+  }
+
+  .shemous-scurve-card:hover {
+    transform: none !important;
+  }
+
+  .card-scurve-header {
+    height: 180px !important;
+  }
+
+  .card-scurve-content {
+    padding: 2.5rem 1.5rem 3rem 1.5rem !important;
+    border-top-left-radius: 60px !important;
+  }
+
+  .glass-card-organic {
+    padding: 2rem !important;
+    border-radius: 24px !important;
+  }
+
+  /* Contact page form grids */
+  .hero-split-grid {
+    gap: 1.5rem !important;
+  }
+}
+
+/* -- Admin panel mobile -- */
+@media (max-width: 640px) {
+  /* Admin dashboard stat cards */
+  .liquid-card-organic {
+    min-width: 0 !important;
+  }
+}
+
+/* -- Animate spin for loader -- */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
+}

@@ -85,7 +85,7 @@ export default function Home() {
 
           {/* Stats row */}
           <ScrollReveal direction="up" delay={0.1} style={{ marginBottom: 'var(--content-gap)' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '2rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '2rem' }}>
               {stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}
@@ -141,7 +141,7 @@ export default function Home() {
                 <p style={{ fontSize: '1.3rem', color: 'white', lineHeight: '1.8', opacity: 0.8, fontWeight: '400', marginBottom: '4.5rem' }}>
                   From the rich biodiversity of Uganda to high-end global marketplaces. We handle the complexity of international export with masterful efficiency.
                 </p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '2rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 140px), 1fr))', gap: '2rem' }}>
                   {[{ value: 40, suffix: '+', label: 'Export Hubs' }, { value: 100, suffix: '%', label: 'Organic Purity' }].map((s) => (
                     <div key={s.label}>
                       <div style={{ fontSize: '3rem', fontWeight: '900', color: 'var(--primary)' }}>

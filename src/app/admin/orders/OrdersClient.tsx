@@ -290,7 +290,7 @@ export default function OrdersClient() {
                         </div>
                      </div>
 
-                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', paddingTop: '1.5rem', borderTop: '1px dashed #E2E8F0' }}>
+                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '2rem', paddingTop: '1.5rem', borderTop: '1px dashed #E2E8F0' }}>
                         <div>
                            <span style={detailLabelStyle}>Received At</span>
                            <p style={{ margin: '0.4rem 0 0', fontWeight: '800', color: 'var(--secondary)' }}>
