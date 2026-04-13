@@ -147,8 +147,9 @@ export default function WhatsAppOrderModal({ isOpen, onClose, product }: WhatsAp
               <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '2rem' }}>
                 <div style={{ position: 'relative', flexShrink: 0 }}>
                   <img
-                    src={product.image}
+                    src={product.image || '/images/nectar.png'}
                     alt={product.name}
+                    onError={(e) => { (e.target as HTMLImageElement).src = '/images/nectar.png'; }}
                     style={{
                       width: isMobile ? '74px' : '90px',
                       height: isMobile ? '74px' : '90px',

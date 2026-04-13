@@ -323,16 +323,16 @@ export default function ProductsPage() {
                           loading="lazy"
                           decoding="async"
                           onLoad={(e) => (e.target as HTMLImageElement).classList.add('loaded')}
+                          onError={(e) => { (e.target as HTMLImageElement).src = '/images/nectar.png'; (e.target as HTMLImageElement).classList.add('loaded'); }}
                           style={{ 
-                            width: '280px',
-                            height: '280px',
-                            borderRadius: '50%',
+                            width: '100%',
+                            height: '100%',
                             objectFit: 'cover',
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
                             zIndex: 2,
-                            marginTop: '-20px',
-                            filter: 'saturate(1.2) contrast(1.1) drop-shadow(0 30px 60px rgba(0, 45, 38, 0.25))',
-                            border: '6px solid rgba(255,255,255,0.4)',
-                            boxShadow: '0 0 0 1px rgba(0, 45, 38, 0.1)',
+                            filter: 'saturate(1.2) contrast(1.1)',
                             transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
                           }}
                       />

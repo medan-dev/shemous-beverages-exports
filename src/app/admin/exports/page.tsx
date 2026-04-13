@@ -232,7 +232,7 @@ export default function AdminExports() {
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                               <div style={{ width: '44px', height: '44px', background: '#F3F4F6', borderRadius: '12px', overflow: 'hidden', flexShrink: 0 }}>
                                 {p.image_url
-                                  ? <img src={p.image_url} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                  ? <img src={p.image_url} alt={p.name} onError={(e) => { (e.target as HTMLImageElement).src = '/images/nectar.png'; }} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                   : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Package size={18} style={{ opacity: 0.3 }} /></div>}
                               </div>
                               <div style={{ minWidth: 0 }}>
@@ -279,7 +279,7 @@ export default function AdminExports() {
                     <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
                       <div style={{ width: '52px', height: '52px', background: '#F3F4F6', borderRadius: '14px', overflow: 'hidden', flexShrink: 0 }}>
                         {p.image_url
-                          ? <img src={p.image_url} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                          ? <img src={p.image_url} alt={p.name} onError={(e) => { (e.target as HTMLImageElement).src = '/images/nectar.png'; }} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                           : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Package size={20} style={{ opacity: 0.3 }} /></div>}
                       </div>
                       <div style={{ flex: 1, minWidth: 0 }}>
@@ -336,7 +336,7 @@ export default function AdminExports() {
                   <label style={labelStyle}>Export Product Image</label>
                   <div style={{ width: '100%', height: '180px', border: '2px dashed #CBD5E1', borderRadius: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden', background: '#F8FAFC', cursor: 'pointer' }}>
                     {imagePreview
-                      ? <img src={imagePreview} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      ? <img src={imagePreview} alt="Preview" onError={(e) => { (e.target as HTMLImageElement).src = '/images/nectar.png'; }} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       : <div style={{ textAlign: 'center', color: '#94A3B8', pointerEvents: 'none' }}><UploadCloud size={36} style={{ margin: '0 auto 0.4rem' }} /><p style={{ fontSize: '0.82rem', fontWeight: '600' }}>{editingProduct ? 'Click to replace image' : 'Click to upload'}</p></div>
                     }
                     <input type="file" accept="image/*" onChange={handleImageChange} style={{ position: 'absolute', inset: 0, opacity: 0, cursor: 'pointer' }} />

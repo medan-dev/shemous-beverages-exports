@@ -304,6 +304,7 @@ svg.curved-path {
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
   transition: all 0.6s var(--transition);
 }
 
@@ -549,7 +550,7 @@ html, body {
 
   .card-scurve-header {
     height: 260px !important;
-    overflow: visible !important;
+    overflow: hidden !important;
   }
 
   .card-scurve-content {
@@ -561,10 +562,10 @@ html, body {
     height: 300px !important;
   }
 
-  /* Scale product images on tablet */
+  /* Make product images responsive on tablet */
   .product-export-image {
-    width: 180px !important;
-    height: 180px !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 
   /* Products grid single column */
@@ -597,7 +598,7 @@ html, body {
 
   .card-scurve-header {
     height: 240px !important;
-    overflow: visible !important;
+    overflow: hidden !important;
   }
 
   .card-scurve-content {
@@ -610,11 +611,11 @@ html, body {
     height: 280px !important;
   }
 
-  /* Scale product images smaller on phones */
+  /* Make product images responsive on phones */
   .product-export-image {
-    width: 150px !important;
-    height: 150px !important;
-    border-width: 4px !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-width: 0px !important;
   }
 
   .glass-card-organic {

@@ -39,7 +39,7 @@ export default function OrangeJuicePage() {
         </motion.h1>
       </div>
 
-      <main className="container" style={{ position: 'relative', zIndex: 10, display: 'grid', gridTemplateColumns: '80px 1fr 1fr', gap: '2rem', minHeight: 'calc(100vh - 120px)' }}>
+      <main className="container shemous-orange-grid" style={{ position: 'relative', zIndex: 10, display: 'grid', gap: '2rem', minHeight: 'calc(100vh - 120px)' }}>
         
         {/* Left Sidebar - Vertical Text */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -164,6 +164,19 @@ export default function OrangeJuicePage() {
       <style jsx global>{`
         body {
           background-color: var(--orange-bg) !important;
+        }
+        .shemous-orange-grid {
+          grid-template-columns: 80px 1fr 1fr;
+        }
+        @media (max-width: 992px) {
+          .shemous-orange-grid {
+            grid-template-columns: 1fr;
+            padding-top: 2rem;
+            padding-bottom: 4rem;
+          }
+          .shemous-orange-grid > div:first-child {
+            display: none !important;
+          }
         }
       `}</style>
     </div>

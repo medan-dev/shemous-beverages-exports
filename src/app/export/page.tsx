@@ -145,7 +145,8 @@ export default function ExportPage() {
                     whileHover={{ y: -10, transition: { type: 'spring', stiffness: 260, damping: 20 } }}
                     key={product.id}
                   >
-                    <div className="shemous-scurve-card" style={{ height: '100%', cursor: 'default' }}>
+                    <Link href={`/export/${product.id}`} style={{ textDecoration: 'none' }}>
+                      <div className="shemous-scurve-card" style={{ height: '100%', cursor: 'pointer' }}>
                       <div className="scurve-bg-fix" />
                       <div className="card-scurve-header">
                         <img 
@@ -156,13 +157,14 @@ export default function ExportPage() {
                             onLoad={(e) => (e.target as HTMLImageElement).classList.add('loaded')}
                             onError={(e) => { (e.target as HTMLImageElement).src = '/images/nectar.png'; (e.target as HTMLImageElement).classList.add('loaded'); }}
                             style={{ 
-                              width: '280px',
-                              height: '280px',
-                              borderRadius: '50%',
+                              width: '100%',
+                              height: '100%',
                               objectFit: 'cover',
+                              position: 'absolute',
+                              top: 0,
+                              left: 0,
                               zIndex: 2,
-                              filter: 'saturate(1.2) contrast(1.1) drop-shadow(0 20px 40px rgba(0, 45, 38, 0.2))',
-                              border: '6px solid rgba(255,255,255,0.8)',
+                              filter: 'saturate(1.2) contrast(1.1)',
                               transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
                             }}
                         />
@@ -202,7 +204,8 @@ export default function ExportPage() {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </Link>
+                </motion.div>
                 ))}
               </div>
             )}

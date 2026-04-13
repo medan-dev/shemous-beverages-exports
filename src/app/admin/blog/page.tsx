@@ -50,7 +50,7 @@ export default function AdminBlog() {
           posts.map((post) => (
             <div key={post.id} className="glass-card" style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                <div style={{ height: '160px', background: 'var(--accent)', position: 'relative' }}>
-                  {post.featured_image ? <img src={post.featured_image} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0.3 }}><BookOpen /></div>}
+                  {post.featured_image ? <img src={post.featured_image} alt={post.title} onError={(e) => { (e.target as HTMLImageElement).src = '/images/nectar.png'; }} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0.3 }}><BookOpen /></div>}
                </div>
                <div style={{ padding: '1.5rem', flexGrow: 1 }}>
                   <h3 style={{ fontSize: '1.1rem', marginBottom: '0.75rem' }}>{post.title}</h3>

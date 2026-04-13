@@ -139,7 +139,7 @@ export default function ProductDetailPage({ params }: { params: any }) {
     <div style={{ minHeight: '100vh', background: 'white', position: 'relative', overflowX: 'hidden' }}>
       {/* Navigation */}
       <nav style={{ position: 'fixed', top: '2rem', left: '2rem', zIndex: 100 }}>
-        <Link href="/products">
+        <Link href="/export">
           <motion.div 
             whileHover={{ x: -10 }}
             style={{ 
@@ -155,7 +155,7 @@ export default function ProductDetailPage({ params }: { params: any }) {
               color: 'var(--secondary)' 
             }}
           >
-            <ChevronLeft size={20} /> Back to Collection
+            <ChevronLeft size={20} /> Back to Exports
           </motion.div>
         </Link>
       </nav>
@@ -313,7 +313,7 @@ export default function ProductDetailPage({ params }: { params: any }) {
               <span style={{ color: 'var(--primary)', fontWeight: '950', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.25em' }}>The Selection</span>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '3.5rem', fontWeight: '700', color: 'white', marginTop: '1rem' }}>Related Masterpieces</h2>
             </div>
-            <Link href="/products">
+            <Link href="/export">
               <button className="btn-hover" style={{ padding: '1rem 2rem', borderRadius: '100px', background: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.2)', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', display: 'flex', gap: '0.8rem', alignItems: 'center' }}>
                 View All <ArrowRight size={18} />
               </button>
@@ -322,7 +322,7 @@ export default function ProductDetailPage({ params }: { params: any }) {
 
           <div className="products-grid">
             {fallbackProducts.slice(0, 3).map((item) => (
-              <Link key={item.id} href={`/products/${item.id}`}>
+              <Link key={item.id} href={`/export/${item.id}`}>
                 <div className="shemous-scurve-card" style={{ height: '380px', minHeight: 'unset' }}>
                   <div className="card-scurve-header" style={{ height: '180px' }}>
                      <img src={item.image || '/images/nectar.png'} onError={(e) => { (e.target as HTMLImageElement).src = '/images/nectar.png'; }} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.2))' }} />
