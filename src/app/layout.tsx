@@ -77,6 +77,44 @@ export default function RootLayout({
         {/* Lightspeed Preloads for critical Above-The-Fold assets */}
         <link rel="preload" href="/images/shemous_logo_master_transparent.png" as="image" />
         <link rel="preload" href="/videos/Create_cinematic_realistic_202604040302.mp4" as="video" type="video/mp4" />
+        
+        {/* Structured Data / JSON-LD for Search Engines */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Shemous Beverages & Exports',
+              url: 'https://shemous-beverages-exports.vercel.app',
+              logo: 'https://shemous-beverages-exports.vercel.app/images/shemous_logo_master_transparent.png',
+              description: "Uganda's premier exporter of global-ready organic fruit juices.",
+              contactPoint: {
+                '@type': 'ContactPoint',
+                telephone: '+256-000-000000', // Update with real number if needed
+                contactType: 'Customer Service',
+                areaServed: 'Global',
+                availableLanguage: ['English']
+              }
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'Shemous Beverages & Exports',
+              url: 'https://shemous-beverages-exports.vercel.app',
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: 'https://shemous-beverages-exports.vercel.app/products?q={search_term_string}',
+                'query-input': 'required name=search_term_string'
+              }
+            })
+          }}
+        />
       </head>
       <body className={`${inter.variable} ${outfit.variable} ${cormorant.variable} ${gochiHand.variable}`} style={{ backgroundColor: 'var(--background)' }} suppressHydrationWarning>
         <div className="noise-overlay" />
