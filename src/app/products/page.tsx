@@ -163,7 +163,7 @@ export default function ProductsPage() {
           <motion.div variants={itemVariants}>
             <span style={{ color: 'var(--primary)', fontWeight: '950', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.25em', display: 'block', marginBottom: '1.2rem' }}>Organic Evolution</span>
             <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'var(--h1-size)', fontWeight: '700', color: 'var(--secondary)', marginBottom: '2rem', lineHeight: '0.95', letterSpacing: '-0.04em' }}>Our Collection</h1>
-            <p style={{ fontSize: '1.35rem', color: 'var(--text-muted)', fontWeight: '450', maxWidth: '650px', lineHeight: '1.7' }}>Experience the pinnacle of Ugandan fruit mastery, delivered globally with clinical integrity.</p>
+            <p style={{ fontSize: '1.35rem', color: 'var(--text-muted)', fontWeight: '450', maxWidth: '650px', lineHeight: '1.7' }}>Discover the **best juices in Uganda**, crafted from the finest organic fruits and delivered globally with clinical integrity.</p>
           </motion.div>
         </header>
 

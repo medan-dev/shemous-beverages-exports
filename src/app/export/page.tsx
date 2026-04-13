@@ -124,7 +124,7 @@ export default function ExportPage() {
                    <Leaf size={24} />
                </div>
                <h2 style={{ fontSize: '2.5rem', fontWeight: '950', color: 'var(--secondary)', marginBottom: '1rem' }}>Fresh Produce Exports</h2>
-               <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}>Discover our premium selection of raw fruits and organic produce, certified for international export.</p>
+               <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}>Sourcing the premium produce responsible for the **best juices in Uganda**, our raw organic fruits are certified for international export.</p>
             </div>
 
             {loading ? (

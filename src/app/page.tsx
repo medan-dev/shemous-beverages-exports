@@ -78,7 +78,7 @@ export default function Home() {
                 Nature Refined for the <br /> <span style={{ color: 'var(--primary)' }}>Global Experience</span>.
               </h2>
               <p style={{ fontSize: '1.35rem', color: 'var(--text-muted)', maxWidth: '650px', margin: '0 auto', lineHeight: '1.8', fontWeight: '450' }}>
-                From the fertile soils of Uganda to the world's most discerning markets, Shemous captures the raw essence of nature with clinical precision.
+                Crafting the **best juices in Uganda** from the fertile soils of the Pearl of Africa to the world's most discerning markets. Shemous captures the raw essence of nature with clinical precision.
               </p>
             </div>
           </ScrollReveal>

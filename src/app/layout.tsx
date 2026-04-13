@@ -31,14 +31,15 @@ const gochiHand = Gochi_Hand({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://shemous-beverages-exports.vercel.app'),
-  title: 'Shemous Beverages & Exports | Premium Organic Ugandan Juices',
-  description: "Uganda's premier exporter of global-ready organic fruit juices. Partner with Shemous to distribute our heritage collection worldwide.",
+  title: 'Shemous Beverages & Exports | Best Juices in Uganda & Organic Global Export',
+  description: 'Discover the best juices in Uganda. Shemous captures the raw essence of African nature, delivering premium, global-ready organic fruit juices to the world.',
+  keywords: ['best juices in Uganda', 'best juice Uganda', 'Ugandan fruit juice', 'organic juice exports', 'premium fruit juice Uganda', 'Shemous beverages'],
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Shemous Beverages & Exports',
-    description: 'Bringing the goodness of the Pearl of Africa to the world with clinical precision and sustainable organic farming.',
+    title: 'Shemous Beverages & Exports | Best Juices in Uganda',
+    description: 'Bringing the best juices in Uganda to the world with clinical precision and sustainable organic farming.',
     url: 'https://shemous.co.ug',
     siteName: 'Shemous Beverages',
     images: [
