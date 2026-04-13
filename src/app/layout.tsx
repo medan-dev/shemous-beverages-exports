@@ -52,6 +52,9 @@ export const metadata: Metadata = {
     icon: '/images/shemous_logo_master_transparent.png',
     apple: '/images/shemous_logo_master_transparent.png',
   },
+  verification: {
+    google: '0HwngfaUMfpDspQ33Cyn_i3U9cR7e2wmCtt61HRL2u8',
+  },
 }
 
 export default function RootLayout({
