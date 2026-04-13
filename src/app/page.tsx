@@ -142,12 +142,17 @@ export default function Home() {
                   From the rich biodiversity of Uganda to high-end global marketplaces. We handle the complexity of international export with masterful efficiency.
                 </p>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 140px), 1fr))', gap: '2rem' }}>
-                  {[{ value: 40, suffix: '+', label: 'Export Hubs' }, { value: 100, suffix: '%', label: 'Organic Purity' }].map((s) => (
+                  {[
+                    { value: 40,  suffix: '+', label: 'Export Hubs' },
+                    { value: 100, suffix: '%', label: 'Organic Purity' },
+                    { value: 25,  suffix: '+', label: 'Global Markets' },
+                    { value: 48,  suffix: 'h', label: 'Direct Dispatch' }
+                  ].map((s) => (
                     <div key={s.label}>
                       <div style={{ fontSize: '3rem', fontWeight: '900', color: 'var(--primary)' }}>
                         <AnimatedCounter value={s.value} suffix={s.suffix} />
                       </div>
-                      <div style={{ fontSize: '0.9rem', color: 'white', fontWeight: '700', opacity: 0.6, textTransform: 'uppercase', letterSpacing: '0.15em' }}>{s.label}</div>
+                      <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'white', opacity: 0.6, textTransform: 'uppercase', letterSpacing: '0.15em', marginTop: '0.5rem' }}>{s.label}</div>
                     </div>
                   ))}
                 </div>
