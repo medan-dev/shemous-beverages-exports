@@ -79,9 +79,18 @@ export default function RootLayout({
         <link rel="preload" href="/images/shemous_logo_master_transparent.png" as="image" />
         <link rel="preload" href="/videos/Create_cinematic_realistic_202604040302.mp4" as="video" type="video/mp4" />
         
-        {/* Structured Data / JSON-LD for Search Engines */}
+      </head>
+      <body className={`${inter.variable} ${outfit.variable} ${cormorant.variable} ${gochiHand.variable}`} style={{ backgroundColor: 'var(--background)' }} suppressHydrationWarning>
+        <div className="noise-overlay" />
+        <ClientLayout>
+            {children}
+        </ClientLayout>
+
+        {/* Structured Data / JSON-LD for Search Engines - Placed at end of body to prevent hydration mismatch from extensions */}
         <script
+          id="json-ld-organization"
           type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
@@ -92,7 +101,7 @@ export default function RootLayout({
               description: "Uganda's premier exporter of global-ready organic fruit juices.",
               contactPoint: {
                 '@type': 'ContactPoint',
-                telephone: '+256-000-000000', // Update with real number if needed
+                telephone: '+256-000-000000',
                 contactType: 'Customer Service',
                 areaServed: 'Global',
                 availableLanguage: ['English']
@@ -101,7 +110,9 @@ export default function RootLayout({
           }}
         />
         <script
+          id="json-ld-website"
           type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
@@ -116,12 +127,6 @@ export default function RootLayout({
             })
           }}
         />
-      </head>
-      <body className={`${inter.variable} ${outfit.variable} ${cormorant.variable} ${gochiHand.variable}`} style={{ backgroundColor: 'var(--background)' }} suppressHydrationWarning>
-        <div className="noise-overlay" />
-        <ClientLayout>
-            {children}
-        </ClientLayout>
       </body>
     </html>
   )

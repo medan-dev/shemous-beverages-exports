@@ -8,7 +8,7 @@ import CurvedDivider from '@/components/CurvedDivider'
 
 export default function OrangeJuicePage() {
   return (
-    <div style={{ backgroundColor: 'var(--orange-bg)', minHeight: '100vh', overflow: 'hidden', position: 'relative', paddingTop: '180px' }}>
+    <div style={{ backgroundColor: 'var(--orange-bg)', minHeight: '100vh', overflow: 'hidden', position: 'relative', paddingTop: 'var(--section-padding-top)', paddingBottom: '120px' }}>
       <CurvedDivider color="var(--orange-bg)" position="bottom" height="150px" />
       
       {/* Background Large Text */}
@@ -67,7 +67,7 @@ export default function OrangeJuicePage() {
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            style={{ position: 'relative', zIndex: 2, width: '100%', maxWidth: '600px' }}
+            style={{ position: 'relative', zIndex: 2, width: '100%', maxWidth: '480px' }}
           >
             <Image 
               src="/images/orange_glass.png" 

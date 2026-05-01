@@ -72,7 +72,7 @@
   /* Responsive Spacing & Balancing */
   --container-padding: 6rem;
   --container-max-width: 1400px;
-  --section-padding-top: clamp(8rem, 20vh, 240px);
+  --section-padding-top: clamp(12rem, 20vh, 240px);
   --section-padding-bottom: 120px;
   --content-gap: clamp(4rem, 10vh, 10rem);
 }
@@ -249,17 +249,25 @@ svg.curved-path {
 }
 
 .shemous-scurve-card {
-  background: white;
-  border-radius: 50px;
-  overflow: hidden;
-  box-shadow: 0 40px 110px -30px rgba(0, 45, 38, 0.12);
+  min-height: 520px;
+  background: var(--background);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   border: 1px solid rgba(0, 45, 38, 0.05);
-  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  border-radius: 50px;
   display: flex;
   flex-direction: column;
-  position: relative;
-  height: 100%; /* Height consistency */
-  min-height: 580px; /* Reduced masterpiece height for better density */
+}
+
+.shemous-scurve-card img {
+  object-fit: cover;
+  width: 100%;
+}
+
+.shemous-scurve-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 50px 100px -20px rgba(0, 45, 38, 0.15);
+  border-color: var(--primary-15);
 }
 
 /* Professional Truncation */
@@ -297,33 +305,38 @@ svg.curved-path {
 
 /* Interlocking Top: The color "pours" into the white */
 .card-scurve-header {
-  height: 280px;
-  background: linear-gradient(135deg, var(--secondary), var(--primary));
-  border-bottom-right-radius: 100px; /* Smoother Blend */
+  height: 260px;
+  background: linear-gradient(135deg, var(--secondary), var(--primary-dark));
+  border-bottom-right-radius: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  transition: all 0.6s var(--transition);
+  transition: all 0.5s ease;
 }
 
 .shemous-scurve-card:hover .card-scurve-header {
-  height: 300px;
+  height: 280px;
 }
 
 /* Interlocking Bottom: The white "waves" into the color */
 .card-scurve-content {
   background: white;
-  border-top-left-radius: 100px; /* Smoother Blend */
-  margin-top: -60px;
-  padding: 5rem 3.5rem 6rem 3.5rem; /* Increased side and bottom spacing */
+  border-top-left-radius: 80px;
+  margin-top: -50px;
+  padding: 4rem 2rem 4rem 2rem;
   text-align: center;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   position: relative;
   z-index: 2;
+  transition: all 0.5s ease;
+}
+
+.shemous-scurve-card:hover .card-scurve-content {
+  padding-top: 4.5rem;
 }
 
 /* Ensuring the header background shows behind the white corner */

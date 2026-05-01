@@ -332,7 +332,7 @@ export default function ProductsPage() {
                             top: 0,
                             left: 0,
                             zIndex: 2,
-                            filter: 'saturate(1.2) contrast(1.1)',
+                            filter: 'saturate(1.1) contrast(1.05)',
                             transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
                           }}
                       />

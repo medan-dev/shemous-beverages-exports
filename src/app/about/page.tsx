@@ -7,38 +7,52 @@ import ScrollReveal from '@/components/ScrollReveal'
 
 export default function AboutPage() {
   return (
-    <div style={{ 
+    <div suppressHydrationWarning style={{ 
       backgroundColor: 'var(--bg-creme)', 
       minHeight: '100vh', 
       padding: 'var(--section-padding-top) 0 var(--section-padding-bottom) 0', 
       position: 'relative',
       overflow: 'hidden'
     }}>
-      {/* Decorative Hero Blob */}
+      {/* Cinematic Depth: Living Background Blobs */}
       <div style={{
         position: 'absolute',
-        top: '5%',
-        left: '-10%',
+        top: '15%',
+        right: '-10%',
+        width: '700px',
+        height: '700px',
+        background: 'radial-gradient(circle, rgba(255, 183, 3, 0.08) 0%, rgba(255, 183, 3, 0) 70%)',
+        borderRadius: '50%',
+        filter: 'blur(100px)',
+        zIndex: 0,
+        pointerEvents: 'none',
+        animation: 'blobDrift1 25s ease-in-out infinite'
+      }} />
+      <div style={{
+        position: 'absolute',
+        bottom: '10%',
+        left: '-5%',
         width: '600px',
         height: '600px',
-        background: 'radial-gradient(circle, rgba(255, 183, 3, 0.08) 0%, rgba(255, 183, 3, 0) 70%)',
+        background: 'radial-gradient(circle, rgba(0, 77, 64, 0.05) 0%, rgba(0, 77, 64, 0) 70%)',
         borderRadius: '50%',
         filter: 'blur(80px)',
         zIndex: 0,
-        pointerEvents: 'none'
+        pointerEvents: 'none',
+        animation: 'blobDrift2 30s ease-in-out infinite'
       }} />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         {/* Header / Intro Hero - Centered Architecture */}
         <div style={{ textAlign: 'center', maxWidth: '950px', margin: `0 auto var(--content-gap) auto` }}>
-          <ScrollReveal>
+          <ScrollReveal blur direction="up">
             <div>
-              <div style={{ marginBottom: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}>
-                <div style={{ width: '40px', height: '2px', background: 'var(--primary)' }} />
-                <span style={{ color: 'var(--secondary)', fontWeight: '800', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.3em' }}>
+              <div style={{ marginBottom: '2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
+                <div style={{ width: '48px', height: '2px', background: 'var(--primary)', opacity: 0.6 }} />
+                <span style={{ color: 'var(--secondary)', fontWeight: '950', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.4em' }}>
                   Our Heritage
                 </span>
-                <div style={{ width: '40px', height: '2px', background: 'var(--primary)' }} />
+                <div style={{ width: '48px', height: '2px', background: 'var(--primary)', opacity: 0.6 }} />
               </div>
               
               <h1 style={{ 
@@ -46,9 +60,9 @@ export default function AboutPage() {
                 fontSize: 'var(--h1-size)', 
                 fontWeight: '700', 
                 color: 'var(--secondary)', 
-                lineHeight: '0.9', 
+                lineHeight: '1.05', 
                 letterSpacing: '-0.04em', 
-                marginBottom: '3.5rem' 
+                marginBottom: '4rem' 
               }}>
                 Ugandan <br />
                 <span className="text-gradient-gold">Organic Soul</span>
@@ -60,44 +74,43 @@ export default function AboutPage() {
                 lineHeight: '1.8', 
                 fontWeight: '450',
                 margin: '0 auto',
-                maxWidth: '750px' 
+                maxWidth: '780px' 
               }}>
-                Shemous Beverages & Exports was founded with a singular mission: to bring the authentic, rich taste of Ugandan organic fruits to the global stage while supporting local farming communities through sustainable practice.
+                Shemous Beverages & Exports was founded with a singular mission: to bring the authentic, rich taste of Ugandan organic fruits to the global stage while supporting local farming communities through sustainable practices.
               </p>
             </div>
           </ScrollReveal>
-
         </div>
       </div>
 
-
-
       {/* Heritage Narrative Section - Omubisi Journey */}
-      <div style={{ backgroundColor: 'white', padding: 'var(--section-padding-top) 0', position: 'relative' }}>
+      <section style={{ backgroundColor: 'white', padding: 'var(--section-padding-top) 0', position: 'relative' }}>
         <CurvedDivider color="var(--bg-creme)" position="top" height="200px" />
         
         <div className="container">
           <div className="hero-split-grid" style={{ alignItems: 'center' }}>
-            <ScrollReveal direction="left" className="curvy-mask-organic">
-              <div className="liquid-card-organic" style={{ height: '750px', background: 'var(--secondary)' }}>
+            <ScrollReveal direction="left" blur>
+              <div className="liquid-card-organic curvy-mask-organic" style={{ height: '750px', background: 'var(--secondary)', padding: 0, overflow: 'hidden' }}>
                 <img 
                    src="/images/omubisi_liquid_motion.png" 
                    alt="The Pure Essence of Omubisi" 
+                   loading="lazy"
+                   decoding="async"
                    style={{ width: '100%', height: '100%', objectFit: 'cover', mixBlendMode: 'soft-light', opacity: 0.8 }}
                 />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent, rgba(0, 45, 38, 0.6))' }} />
               </div>
             </ScrollReveal>
             
-            <ScrollReveal direction="right">
-              <div style={{ paddingLeft: 'clamp(0rem, 2vw, 2rem)' }}>
-                <span style={{ color: 'var(--primary)', fontWeight: '800', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '2.5rem' }}>Cultural Legacy</span>
+            <ScrollReveal direction="right" blur>
+              <div style={{ paddingLeft: 'clamp(0rem, 4vw, 4rem)' }}>
+                <span className="shemous-label" style={{ marginBottom: '2.5rem', color: 'var(--primary)' }}>Cultural Legacy</span>
                 <h2 style={{ 
                   fontFamily: 'var(--font-serif)', 
                   fontSize: 'var(--h2-size)', 
                   fontWeight: '700', 
                   color: 'var(--secondary)', 
-                  lineHeight: '0.95', 
+                  lineHeight: '1.05', 
                   letterSpacing: '-0.03em', 
                   marginBottom: '4rem' 
                 }}>
@@ -122,10 +135,34 @@ export default function AboutPage() {
         </div>
         
         <CurvedDivider color="var(--bg-creme)" position="bottom" height="200px" />
-      </div>
+      </section>
+
+      {/* Mission & Vision Section - New Piece */}
+      <section style={{ padding: 'var(--section-padding-top) 0', position: 'relative' }}>
+         <div className="container">
+            <div className="hero-split-grid" style={{ gap: '4rem' }}>
+               <ScrollReveal direction="up" blur>
+                  <div className="liquid-card-organic" style={{ background: 'white', border: '1px solid var(--primary-15)' }}>
+                     <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '2.5rem', color: 'var(--secondary)', marginBottom: '2rem' }}>Our Mission</h3>
+                     <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', lineHeight: '1.8' }}>
+                        To revolutionise the global perception of African beverages by delivering uncompromised, 100% organic Ugandan fruit juices that embody the spirit of our land and the integrity of our farmers.
+                     </p>
+                  </div>
+               </ScrollReveal>
+               <ScrollReveal direction="up" delay={0.2} blur>
+                  <div className="liquid-card-organic" style={{ background: 'var(--secondary)', color: 'white' }}>
+                     <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '2.5rem', color: 'var(--primary)', marginBottom: '2rem' }}>Our Vision</h3>
+                     <p style={{ fontSize: '1.15rem', opacity: 0.9, lineHeight: '1.8' }}>
+                        To be the leading global bridge for Ugandan agricultural excellence, setting the gold standard for organic certification, ethical exports, and cultural preservation in the beverage industry.
+                     </p>
+                  </div>
+               </ScrollReveal>
+            </div>
+         </div>
+      </section>
 
       {/* Values Section */}
-      <div style={{ padding: 'var(--section-padding-top) 0', position: 'relative' }}>
+      <div style={{ padding: 'var(--section-padding-top) 0 var(--section-padding-bottom) 0', position: 'relative' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: 'var(--content-gap)' }}>
              <span className="shemous-label" style={{ marginBottom: '1.5rem' }}>Core Ethos</span>
@@ -135,9 +172,8 @@ export default function AboutPage() {
           </div>
 
           <div style={{ 
-            display: 'flex', 
-            flexWrap: 'wrap',
-            justifyContent: 'center',
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
             gap: '3.5rem' 
           }}>
             {[
@@ -146,7 +182,7 @@ export default function AboutPage() {
               { title: 'Global Reach', desc: 'Bridging the logistics gap to deliver fresh Ugandan beverages anywhere in the world.', icon: <Globe size={32} /> },
               { title: 'Premium Quality', desc: 'Only the finest selection of Bogoya and Gonja bananas make it into our beverage line.', icon: <Star size={32} /> },
             ].map((val, i) => (
-              <ScrollReveal key={val.title} delay={i * 0.1}>
+              <ScrollReveal key={val.title} delay={i * 0.1} blur direction="up">
                 <motion.div 
                   className="liquid-card-organic"
                   whileHover={{ y: -15, scale: 1.02 }}
@@ -156,8 +192,6 @@ export default function AboutPage() {
                     flexDirection: 'column', 
                     gap: '2.5rem',
                     textAlign: 'left',
-                    flex: '1 1 320px',
-                    maxWidth: '420px'
                   }}
                 >
                   <div style={{ 

@@ -137,31 +137,10 @@ export default function ProductDetailPage({ params }: { params: any }) {
 
   return (
     <div style={{ minHeight: '100vh', background: 'white', position: 'relative', overflowX: 'hidden' }}>
-      {/* Navigation */}
-      <nav style={{ position: 'fixed', top: '2rem', left: '2rem', zIndex: 100 }}>
-        <Link href="/products">
-          <motion.div 
-            whileHover={{ x: -10 }}
-            style={{ 
-              padding: '1.2rem 2rem', 
-              background: 'white', 
-              borderRadius: '100px', 
-              boxShadow: '0 10px 30px rgba(0,0,0,0.1)', 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '0.8rem', 
-              fontSize: '0.9rem', 
-              fontWeight: '700', 
-              color: 'var(--secondary)' 
-            }}
-          >
-            <ChevronLeft size={20} /> Back to Collection
-          </motion.div>
-        </Link>
-      </nav>
+      {/* Breadcrumb / Back Navigation is now integrated into content flow below */}
 
       {/* Hero Section: Compressed and Lowered */}
-      <section style={{ position: 'relative', minHeight: '85vh', display: 'flex', alignItems: 'center', paddingTop: '100px' }}>
+      <section style={{ position: 'relative', minHeight: '90vh', display: 'flex', alignItems: 'center', paddingTop: 'clamp(160px, 22vh, 220px)', paddingBottom: '6rem' }}>
         <div style={{ height: '100%', position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 0, background: 'linear-gradient(135deg, var(--secondary), var(--primary))', borderBottomRightRadius: '100px' }} />
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden' }}>
           <ProductBlob color="var(--primary)" size="800px" delay={0} x="-10%" y="-10%" />
@@ -180,17 +159,16 @@ export default function ProductDetailPage({ params }: { params: any }) {
               <div 
                 style={{ 
                   height: 'auto',
-                  aspectRatio: '1/1',
-                  maxWidth: '550px',
+                  aspectRatio: '4/5',
+                  maxWidth: '500px',
                   width: '100%',
                   margin: '0 auto',
-                  background: 'rgba(255,255,255,0.05)', 
-                  backdropFilter: 'blur(10px)',
-                  borderRadius: '30px 30px 100px 30px',
+                  background: 'white', 
+                  borderRadius: '40px',
                   position: 'relative',
                   overflow: 'hidden',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  boxShadow: '0 40px 110px -30px rgba(0, 45, 38, 0.12)'
+                  boxShadow: '0 50px 100px -20px rgba(0, 0, 0, 0.25)',
+                  border: '8px solid rgba(255,255,255,0.1)'
                 }}
               >
                 <div style={{ height: '100%', width: '100%', background: 'transparent', position: 'absolute', top: 0, left: 0 }}>
@@ -212,7 +190,7 @@ export default function ProductDetailPage({ params }: { params: any }) {
                         position: 'absolute',
                         top: 0,
                         left: 0,
-                        filter: 'saturate(1.2) contrast(1.1) drop-shadow(0 40px 100px rgba(0,0,0,0.3))'
+                        filter: 'saturate(1.1) contrast(1.05)'
                       }}
                     />
                   </motion.div>
@@ -227,14 +205,49 @@ export default function ProductDetailPage({ params }: { params: any }) {
               transition={{ duration: 0.8, delay: 0.2 }}
               style={{ color: 'white' }}
             >
-              <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
-                <span style={{ padding: '0.6rem 1.4rem', background: 'rgba(255,255,255,0.1)', borderRadius: '100px', fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.15em', backdropFilter: 'blur(10px)' }}>{product.category}</span>
-                {product.heritage && <span style={{ padding: '0.6rem 1.4rem', background: 'var(--primary)', color: 'var(--secondary)', borderRadius: '100px', fontSize: '0.8rem', fontWeight: '950', textTransform: 'uppercase', letterSpacing: '0.15em' }}>Heritage Choice</span>}
+              <div style={{ marginBottom: '3rem' }}>
+                <Link href="/products">
+                  <motion.div 
+                    whileHover={{ x: -5 }}
+                    style={{ 
+                      display: 'inline-flex', 
+                      alignItems: 'center', 
+                      gap: '0.6rem',
+                      color: 'rgba(255,255,255,0.7)',
+                      fontSize: '0.9rem',
+                      fontWeight: '700',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.1em',
+                      marginBottom: '1.5rem'
+                    }}
+                  >
+                    <ChevronLeft size={16} /> Back to Collection
+                  </motion.div>
+                </Link>
+                
+                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                  <span style={{ padding: '0.6rem 1.4rem', background: 'rgba(255,255,255,0.1)', borderRadius: '100px', fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.15em', backdropFilter: 'blur(10px)', color: 'white', border: '1px solid rgba(255,255,255,0.05)' }}>{product.category}</span>
+                  {product.heritage && (
+                    <span style={{ 
+                      padding: '0.6rem 1.4rem', 
+                      background: 'linear-gradient(135deg, var(--primary), var(--primary-dark))', 
+                      color: 'var(--secondary)', 
+                      borderRadius: '100px', 
+                      fontSize: '0.8rem', 
+                      fontWeight: '950', 
+                      textTransform: 'uppercase', 
+                      letterSpacing: '0.15em',
+                      boxShadow: '0 10px 20px rgba(0,0,0,0.1)'
+                    }}>
+                      Heritage Choice
+                    </span>
+                  )}
+                </div>
               </div>
 
-              <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2.2rem, 8vw, 5.5rem)', fontWeight: '700', lineHeight: 0.95, marginBottom: '2.5rem', letterSpacing: '-0.04em' }}>{product.name}</h1>
+              <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(3rem, 7vw, 5.5rem)', fontWeight: '700', lineHeight: 1.0, marginBottom: '2.5rem', letterSpacing: '-0.04em', textShadow: '0 10px 20px rgba(0,0,0,0.1)' }}>{product.name}</h1>
               
-              <p style={{ fontSize: '1.4rem', lineHeight: 1.6, opacity: 0.9, fontWeight: '450', marginBottom: '3.5rem', maxWidth: '600px' }}>{product.desc}</p>
+              <p style={{ fontSize: '1.25rem', lineHeight: 1.8, opacity: 0.95, fontWeight: '400', marginBottom: '4rem', maxWidth: '580px', color: 'rgba(255,255,255,0.95)', letterSpacing: '0.01em' }}>{product.desc}</p>
 
               <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
                 <button 

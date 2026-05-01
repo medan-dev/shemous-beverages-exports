@@ -6,7 +6,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer style={{ 
+    <footer suppressHydrationWarning style={{ 
       background: 'var(--secondary)', 
       color: 'white', 
       paddingTop: '3.5rem', 

@@ -37,16 +37,18 @@ const ShemousHeader = () => {
           top: 0, 
           left: 0, 
           right: 0, 
-          height: 'clamp(110px, 16vh, 160px)', 
+          height: 'clamp(80px, 12vh, 120px)', 
           display: 'flex', 
           alignItems: 'center', 
           justifyContent: 'space-between', 
           padding: '0 var(--container-padding)',
-          backgroundColor: 'var(--secondary)',
+          backgroundColor: scrolled ? 'rgba(0, 77, 64, 0.85)' : 'var(--secondary)',
+          backdropFilter: scrolled ? 'blur(20px)' : 'none',
           color: 'white',
           zIndex: 100,
-          boxShadow: scrolled ? '0 10px 30px rgba(0,0,0,0.1)' : 'none',
-          transition: 'all 0.3s ease'
+          boxShadow: scrolled ? '0 10px 40px rgba(0,0,0,0.2)' : 'none',
+          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.05)' : 'none'
         }}
       >
         {/* Left Side: Logo & Navigation */}
@@ -57,14 +59,14 @@ const ShemousHeader = () => {
                animate={{ opacity: 1, x: 0 }}
                transition={{ duration: 1.2, ease: "easeOut" }}
                // Massively increased logo container bounds
-               style={{ height: 'clamp(100px, 15vh, 150px)', display: 'flex', alignItems: 'center' }}
+               style={{ height: 'clamp(70px, 10vh, 100px)', display: 'flex', alignItems: 'center' }}
              >
                 <img 
                   className="logo-img"
                   src="/images/shemous_logo_master_transparent.png" 
                   alt="Shemous Beverages & Exports" 
                   // Scaled to overcome any potential built-in PNG padding
-                  style={{ height: '100%', width: 'auto', objectFit: 'contain', transform: 'scale(1.5)', transformOrigin: 'left center' }} 
+                  style={{ height: '100%', width: 'auto', objectFit: 'contain', transform: 'scale(1.2)', transformOrigin: 'left center' }} 
                 />
              </motion.div>
           </Link>
@@ -173,7 +175,7 @@ const ShemousHeader = () => {
                 inset: 0,
                 background: 'rgba(0, 45, 38, 0.95)',
                 zIndex: 90,
-                padding: 'clamp(120px, 15vh, 160px) 2rem 3rem',
+                padding: 'clamp(90px, 12vh, 130px) 2rem 3rem',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '1.5rem',
