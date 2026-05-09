@@ -10,6 +10,8 @@ import AnimatedCounter from '@/components/AnimatedCounter'
 import CurvedDivider from '@/components/CurvedDivider'
 import AnimatedBackground from '@/components/AnimatedBackground'
 import CinematicSplashHero from '@/components/CinematicSplashHero'
+import TrustBanner from '@/components/TrustBanner'
+import FeaturedProducts from '@/components/FeaturedProducts'
 
 // ─── Lazy-loaded heavy components ──────────────────────────────────────────
 const CreativeHero = dynamic(() => import('@/components/CreativeHero'), {
@@ -58,6 +60,9 @@ export default function Home() {
       {/* ── HERO ──────────────────────────────────────────────── */}
       <CinematicSplashHero />
 
+      {/* ── TRUST BANNER (Immediate Social Proof) ─────────────── */}
+      <TrustBanner />
+
       {/* ── SECTION 1: NATURE REFINED ─────────────────────────── */}
       <section style={{ padding: 'var(--section-padding-top) 0 var(--section-padding-bottom) 0', backgroundColor: 'transparent', position: 'relative' }}>
         <div className="container" suppressHydrationWarning>
@@ -105,16 +110,19 @@ export default function Home() {
                     cursor: 'default',
                   }}
                 >
-                  <div style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: '900', color: 'var(--secondary)', lineHeight: 1 }}>
+                  <div suppressHydrationWarning style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: '900', color: 'var(--secondary)', lineHeight: 1 }}>
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </div>
-                  <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.15em', marginTop: '0.8rem' }}>
+                  <div suppressHydrationWarning style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.15em', marginTop: '0.8rem' }}>
                     {stat.label}
                   </div>
                 </motion.div>
               ))}
             </div>
           </ScrollReveal>
+
+          {/* ── FEATURED PRODUCTS (Moved up by user request) ────── */}
+          <FeaturedProducts />
 
           <ScrollReveal delay={0.2}>
             <Suspense fallback={<div style={{ height: 400 }} />}>
@@ -149,10 +157,10 @@ export default function Home() {
                     { value: 48,  suffix: 'h', label: 'Direct Dispatch' }
                   ].map((s) => (
                     <div key={s.label}>
-                      <div style={{ fontSize: '3rem', fontWeight: '900', color: 'var(--primary)' }}>
+                      <div suppressHydrationWarning style={{ fontSize: '3rem', fontWeight: '900', color: 'var(--primary)' }}>
                         <AnimatedCounter value={s.value} suffix={s.suffix} />
                       </div>
-                      <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'white', opacity: 0.6, textTransform: 'uppercase', letterSpacing: '0.15em', marginTop: '0.5rem' }}>{s.label}</div>
+                      <div suppressHydrationWarning style={{ fontSize: '0.85rem', fontWeight: '700', color: 'white', opacity: 0.6, textTransform: 'uppercase', letterSpacing: '0.15em', marginTop: '0.5rem' }}>{s.label}</div>
                     </div>
                   ))}
                 </div>
@@ -212,27 +220,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* CTA */}
-          <ScrollReveal delay={0.4} direction="up" blur style={{ textAlign: 'center', marginTop: 'var(--content-gap)' }}>
-            <Link
-              href="/products"
-              className="liquid-blob-btn btn-hover text-white"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '1rem',
-                padding: '1.5rem 4rem',
-                background: 'var(--secondary)',
-                color: 'white',
-                fontWeight: '800',
-                fontSize: '1rem',
-                textDecoration: 'none',
-                boxShadow: '0 25px 50px rgba(0,77,64,0.15)',
-              }}
-            >
-              Explore All Products <ArrowRight size={20} />
-            </Link>
-          </ScrollReveal>
         </div>
       </section>
     </div>

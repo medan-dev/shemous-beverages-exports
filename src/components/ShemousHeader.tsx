@@ -30,11 +30,41 @@ const ShemousHeader = () => {
 
   return (
     <div style={{ position: 'relative', zIndex: 100 }} suppressHydrationWarning>
+      {/* PROFESSIONAL ADVERT BANNERS MARQUEE */}
+      <div 
+        style={{ 
+          background: 'var(--background)', 
+          overflow: 'hidden',
+          display: scrolled ? 'none' : 'flex',
+          height: '100px', // Perfect fixed height for full-scale 3D math
+          width: '100%',
+          borderBottom: '1px solid rgba(0,0,0,0.05)',
+        }}
+      >
+        <motion.div
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ repeat: Infinity, ease: 'linear', duration: 40 }}
+          style={{ display: 'flex', whiteSpace: 'nowrap', width: 'max-content', height: '100%', alignItems: 'center', gap: '0px', padding: '0px' }}
+        >
+          {/* Ad Banners Array Helper */}
+          {[1, 2].map((loopIndex) => (
+            <React.Fragment key={loopIndex}>
+              <AdvertCard index={0} img="/images/export_banana_juice.png" badge="⭐ 100% ORGANIC" title="Premium Banana Juice" />
+              <AdvertCard index={1} img="/images/export_banana_chips.png" badge="🏆 ISO 22000 CERTIFIED" title="Artisan Banana Chips" />
+              <AdvertCard index={2} img="/images/export_hass_avocado.png" badge="✈️ 48H GLOBAL EXPORT" title="Export-Grade Avocados" />
+              <AdvertCard index={3} img="/images/export_banana_smoothie.png" badge="🥤 PURE NUTRIENTS" title="Banana Smoothie" />
+              <AdvertCard index={4} img="/images/export_birds_eye_chili.png" badge="🌶️ DIRECT FARM" title="Bird's Eye Chili" />
+              <AdvertCard index={5} img="/images/export_matooke.png" badge="🍌 UGANDAN HERITAGE" title="Premium Matooke" />
+            </React.Fragment>
+          ))}
+        </motion.div>
+      </div>
+
       {/* MASTERPIECE HEADER */}
       <motion.header 
         style={{ 
           position: scrolled ? 'fixed' : 'absolute', 
-          top: 0, 
+          top: scrolled ? 0 : 'auto', 
           left: 0, 
           right: 0, 
           height: 'clamp(80px, 12vh, 120px)', 
@@ -258,5 +288,87 @@ const ShemousHeader = () => {
     </div>
   )
 }
+
+const AdvertCard = ({ img, badge, title, index = 0 }: { img: string, badge: string, title: string, index?: number }) => {
+  // To create a perfect 3D rectangular prism, we fix the height so we can calculate the exact translateZ math.
+  // Height = 80px, therefore translateZ = 40px.
+  return (
+    <div style={{ 
+      perspective: '1200px', 
+      width: 'clamp(280px, 35vw, 400px)', 
+      height: '100px', // Extends perfectly to full container height
+      flexShrink: 0,
+      margin: '0px', // Removed gaps for seamless horizontal layout
+      cursor: 'pointer'
+    }}>
+      <motion.div 
+        whileHover={{ scale: 1.05 }}
+        animate={{ 
+          rotateX: [0, 0, -90, -90, -180, -180, -270, -270, -360]
+        }}
+        transition={{ 
+          duration: 16, 
+          repeat: Infinity,
+          delay: index * 0.4, // Creates a cascading wave effect down the marquee
+          times: [0, 0.2, 0.25, 0.45, 0.5, 0.7, 0.75, 0.95, 1],
+          ease: "backInOut" // Creates a springy, mechanical snap
+        }}
+        style={{
+          width: '100%',
+          height: '100%',
+          position: 'relative',
+          transformStyle: 'preserve-3d',
+        }}
+      >
+        <CubeFace rotation="rotateX(0deg)" img={img} badge={badge} title={title} />
+        <CubeFace rotation="rotateX(90deg)" img={img} badge={badge} title={title} />
+        <CubeFace rotation="rotateX(180deg)" img={img} badge={badge} title={title} />
+        <CubeFace rotation="rotateX(-90deg)" img={img} badge={badge} title={title} />
+      </motion.div>
+    </div>
+  )
+}
+
+const CubeFace = ({ rotation, img, badge, title }: any) => (
+  <div style={{
+    position: 'absolute',
+    inset: 0,
+    backfaceVisibility: 'hidden',
+    transform: `${rotation} translateZ(50px)`, // Recalibrated for exactly half of 100px height
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0 1.5rem',
+    background: '#001a14',
+    border: '1px solid rgba(255,255,255,0.05)',
+    boxShadow: 'inset 0 0 40px rgba(0,0,0,0.8)'
+  }}>
+    <img src={img} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 1, zIndex: 0 }} />
+    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,20,15,0.75) 0%, rgba(0,20,15,0.15) 100%)', zIndex: 1 }} />
+    <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+      <span style={{
+        fontSize: '0.65rem',
+        background: 'var(--primary)',
+        color: 'var(--secondary)',
+        padding: '0.2rem 0.6rem',
+        borderRadius: '4px',
+        width: 'fit-content',
+        fontWeight: 900,
+        boxShadow: '0 4px 10px rgba(0,0,0,0.3)'
+      }}>
+        {badge}
+      </span>
+      <span style={{
+        fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+        fontWeight: 900,
+        color: 'white',
+        lineHeight: 1.1,
+        textTransform: 'uppercase',
+        textShadow: '0 4px 10px rgba(0,0,0,0.8)'
+      }}>
+        {title}
+      </span>
+    </div>
+  </div>
+)
 
 export default ShemousHeader

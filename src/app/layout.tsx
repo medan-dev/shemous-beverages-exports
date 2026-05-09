@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, Outfit, Cormorant_Garamond, Gochi_Hand } from 'next/font/google'
 import './globals.css'
 import ClientLayout from '@/components/ClientLayout'
@@ -60,6 +60,15 @@ export const metadata: Metadata = {
   verification: {
     google: '0HwngfaUMfpDspQ33Cyn_i3U9cR7e2wmCtt61HRL2u8',
   },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
+  themeColor: '#004D40',
 }
 
 export default function RootLayout({

@@ -38,7 +38,7 @@ export default function CinematicSplashHero() {
       style={{
         position: 'relative',
         width: '100%',
-        minHeight: '120vh',
+        minHeight: '100dvh',
         overflow: 'hidden',
         backgroundColor: '#001a14',
         /* Cinematic convex curve at bottom */
@@ -160,8 +160,8 @@ export default function CinematicSplashHero() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          /* Radical Spacing: Guaranteed total clearance for both header (fixed) and footer waves */
-          padding: 'clamp(18rem, 26vh, 22rem) clamp(1.5rem, 5vw, 6rem) clamp(22rem, 36vh, 32rem) clamp(1.5rem, 5vw, 6rem)',
+          /* Responsive Spacing: Prevents content from being pushed off-screen on mobile while maintaining cinematic feel on desktop */
+          padding: 'clamp(8rem, 22vh, 22rem) clamp(1rem, 5vw, 6rem) clamp(10rem, 25vh, 32rem) clamp(1rem, 5vw, 6rem)',
           y: contentY,
           /* Deep vignette scrim for professional lift */
           background: 'radial-gradient(circle at center, rgba(0,20,15,0.65) 0%, rgba(0,20,15,0.2) 60%, transparent 90%)',
@@ -184,9 +184,9 @@ export default function CinematicSplashHero() {
             marginBottom: '2rem',
           }}
         >
-          <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--primary)', animation: 'pulse 1.5s ease-in-out infinite' }} />
+          <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#10B981', animation: 'pulse 1.5s ease-in-out infinite' }} />
           <span style={{ color: 'var(--primary)', fontWeight: '800', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.25em' }}>
-            Premium Ugandan Exports
+            Ready For Global Export
           </span>
         </motion.div>
 
@@ -203,7 +203,6 @@ export default function CinematicSplashHero() {
             lineHeight: '0.9',
             letterSpacing: '-0.04em',
             marginBottom: '2.5rem',
-            /* Enhanced multi-layered shadow for cinematic lift */
             textShadow: `
               0 2px 10px rgba(0,0,0,0.8),
               0 10px 40px rgba(0,0,0,0.5),
@@ -211,7 +210,7 @@ export default function CinematicSplashHero() {
             `,
           }}
         >
-          Fresh, Pure
+          The World's Purest
           <br />
           <span
             style={{
@@ -219,11 +218,10 @@ export default function CinematicSplashHero() {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              /* Strong dark drop-shadow specifically for gold-on-gold contrast */
               filter: 'drop-shadow(0 4px 12px rgba(0,20,15,0.9)) drop-shadow(0 10px 30px rgba(0,20,15,0.6))',
             }}
           >
-            &amp; Authentic.
+            Organic Nectar.
           </span>
         </motion.h1>
 
@@ -233,17 +231,17 @@ export default function CinematicSplashHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.3, ease: [0.22, 1, 0.36, 1] }}
           style={{
-            color: 'rgba(255,255,255,0.95)', /* Increased opacity for legibility */
+            color: 'rgba(255,255,255,0.95)',
             fontSize: 'clamp(1.1rem, 2vw, 1.4rem)',
             lineHeight: '1.7',
-            maxWidth: 650,
+            maxWidth: 700,
             marginBottom: '3.5rem',
-            fontWeight: '600', /* Thicker for better definition */
+            fontWeight: '600',
             textShadow: '0 4px 15px rgba(0,0,0,0.9)',
           }}
         >
-          Experience the pinnacle of Ugandan fruit exports. Sustainably sourced,
-          organic‑certified, and globally delivered with clinical mastery.
+          Secure your supply of Uganda's highest-grade export beverages. 
+          Certified organic, clinically bottled, and dispatched worldwide in 48 hours.
         </motion.p>
 
         {/* CTA row */}
@@ -297,7 +295,7 @@ export default function CinematicSplashHero() {
       </motion.div>
 
       {/* ── Professional Curved Liquid Border ────────────────── */}
-      <div style={{ position: 'absolute', bottom: -1, left: 0, width: '100%', zIndex: 15, pointerEvents: 'none' }}>
+      <div suppressHydrationWarning style={{ position: 'absolute', bottom: -1, left: 0, width: '100%', zIndex: 15, pointerEvents: 'none' }}>
         <svg viewBox="0 0 1440 180" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', display: 'block' }} preserveAspectRatio="none">
           <path 
             d="M0 180H1440V100C1440 100 1260 20 1080 20C900 20 720 140 540 140C360 140 180 20 0 20V180Z"
