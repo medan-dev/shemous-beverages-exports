@@ -38,7 +38,7 @@ export default function CinematicSplashHero() {
       style={{
         position: 'relative',
         width: '100%',
-        minHeight: '100dvh',
+        minHeight: 'clamp(1000px, 115vh, 1250px)',
         overflow: 'hidden',
         backgroundColor: '#001a14',
         /* Cinematic convex curve at bottom */
@@ -161,7 +161,7 @@ export default function CinematicSplashHero() {
           alignItems: 'center',
           justifyContent: 'center',
           /* Responsive Spacing: Prevents content from being pushed off-screen on mobile while maintaining cinematic feel on desktop */
-          padding: 'clamp(8rem, 22vh, 22rem) clamp(1rem, 5vw, 6rem) clamp(10rem, 25vh, 32rem) clamp(1rem, 5vw, 6rem)',
+          padding: 'clamp(15rem, 28vh, 28rem) clamp(1rem, 5vw, 6rem) clamp(8rem, 15vh, 18rem) clamp(1rem, 5vw, 6rem)',
           y: contentY,
           /* Deep vignette scrim for professional lift */
           background: 'radial-gradient(circle at center, rgba(0,20,15,0.65) 0%, rgba(0,20,15,0.2) 60%, transparent 90%)',
