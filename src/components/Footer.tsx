@@ -39,7 +39,7 @@ export default function Footer() {
               <img 
                 src="/images/shemous_logo_master_transparent.png" 
                 alt="Shemous Beverages Logo" 
-                style={{ height: '70px', objectFit: 'contain' }} 
+                style={{ height: '110px', objectFit: 'contain' }} 
               />
             </Link>
             <p style={{ color: '#94a3b8', lineHeight: '1.7', fontSize: '0.95rem', maxWidth: '350px' }}>

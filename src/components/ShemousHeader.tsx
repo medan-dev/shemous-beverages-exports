@@ -62,7 +62,7 @@ const ShemousHeader = () => {
               src="/images/shemous_logo_master_transparent.png" 
               alt="Shemous Beverages Logo" 
               style={{ 
-                height: scrolled ? '80px' : '120px', 
+                height: scrolled ? '100px' : '160px', 
                 objectFit: 'contain',
                 filter: isLightTheme ? 'brightness(0)' : 'none',
                 transition: 'height 0.4s ease, filter 0.4s ease'
@@ -79,7 +79,7 @@ const ShemousHeader = () => {
                 style={{
                   color: textColor,
                   textDecoration: 'none',
-                  fontSize: '0.95rem',
+                  fontSize: '1.1rem',
                   fontWeight: '700',
                   letterSpacing: '0.02em',
                   opacity: 0.9,
@@ -100,7 +100,7 @@ const ShemousHeader = () => {
               style={{ 
                 color: textColor, 
                 textDecoration: 'none', 
-                fontSize: '0.95rem', 
+                fontSize: '1.1rem', 
                 fontWeight: '700',
                 display: 'flex',
                 alignItems: 'center',
@@ -117,7 +117,7 @@ const ShemousHeader = () => {
                 padding: '0.6rem 1.5rem', 
                 borderRadius: '100px',
                 textDecoration: 'none', 
-                fontSize: '0.95rem', 
+                fontSize: '1.1rem', 
                 fontWeight: '800',
                 transition: 'all 0.3s ease',
                 boxShadow: '0 4px 15px rgba(249, 115, 22, 0.3)'
