@@ -1,0 +1,93 @@
+[
+  {
+    "id": "37d2a438-8211-4bdf-b8ba-f72b866c9824",
+    "name": "Classic Banana Nectar",
+    "description": null,
+    "price": null,
+    "category": "Banana Juice",
+    "image_url": "https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&q=400",
+    "stock_status": "in_stock",
+    "is_featured": true,
+    "metadata": {},
+    "created_at": "2026-04-02T02:10:39.027872+00:00",
+    "updated_at": "2026-04-02T02:10:39.027872+00:00"
+  },
+  {
+    "id": "fb5d0d27-e18c-4f95-8eae-16283d7c7783",
+    "name": "Tropical Banana Smoothie",
+    "description": null,
+    "price": null,
+    "category": "Banana Smoothie",
+    "image_url": "https://images.unsplash.com/photo-1626081498642-eacde0fc7ff0?auto=format&fit=crop&q=400",
+    "stock_status": "in_stock",
+    "is_featured": false,
+    "metadata": {},
+    "created_at": "2026-04-02T02:10:39.459448+00:00",
+    "updated_at": "2026-04-02T02:10:39.459448+00:00"
+  },
+  {
+    "id": "cc2ef5f6-3005-4bba-8b7d-484b97227146",
+    "name": "Organic Hass Avocado",
+    "description": null,
+    "price": null,
+    "category": "Fresh Produce",
+    "image_url": "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&q=400",
+    "stock_status": "in_stock",
+    "is_featured": false,
+    "metadata": {},
+    "created_at": "2026-04-02T02:10:39.780018+00:00",
+    "updated_at": "2026-04-02T02:10:39.780018+00:00"
+  },
+  {
+    "id": "fd9d4475-fd66-4db5-9eb5-f3f8383719f2",
+    "name": "Ugandan Bird's Eye Chili",
+    "description": null,
+    "price": null,
+    "category": "Fresh Produce",
+    "image_url": "https://images.unsplash.com/photo-1588253518678-8386ba932470?auto=format&fit=crop&q=400",
+    "stock_status": "in_stock",
+    "is_featured": false,
+    "metadata": {},
+    "created_at": "2026-04-02T02:10:40.027553+00:00",
+    "updated_at": "2026-04-02T02:10:40.027553+00:00"
+  },
+  {
+    "id": "6bef8279-b459-4822-964b-c3a303c66334",
+    "name": "Premium Matooke (Green Bananas)",
+    "description": null,
+    "price": null,
+    "category": "Fresh Produce",
+    "image_url": "https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&q=400",
+    "stock_status": "in_stock",
+    "is_featured": true,
+    "metadata": {},
+    "created_at": "2026-04-02T02:10:40.277661+00:00",
+    "updated_at": "2026-04-02T02:10:40.277661+00:00"
+  },
+  {
+    "id": "887a6715-ff38-4941-80fa-9dfddf863f88",
+    "name": "Organic Banana Milk",
+    "description": null,
+    "price": null,
+    "category": "Banana Milk",
+    "image_url": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=400",
+    "stock_status": "in_stock",
+    "is_featured": false,
+    "metadata": {},
+    "created_at": "2026-04-02T02:10:40.505607+00:00",
+    "updated_at": "2026-04-02T02:10:40.505607+00:00"
+  },
+  {
+    "id": "7c9eedca-4a39-48f6-99cb-dece0c01891a",
+    "name": "Dried Banana Chips",
+    "description": null,
+    "price": null,
+    "category": "Dried Banana Chips",
+    "image_url": "https://images.unsplash.com/photo-1634861833075-8bd3c25400ee?auto=format&fit=crop&q=400",
+    "stock_status": "in_stock",
+    "is_featured": true,
+    "metadata": {},
+    "created_at": "2026-04-02T02:10:40.728554+00:00",
+    "updated_at": "2026-04-02T02:10:40.728554+00:00"
+  }
+]

@@ -1,0 +1,518 @@
+/* Fonts are loaded via next/font/google in layout.tsx for optimal performance (preloading + self-hosting). */
+
+/* =========================================
+   PERFORMANCE: CSS Keyframes for background
+   blob animations — runs on compositor thread
+   instead of JS/Framer Motion RAF loops.
+   ========================================= */
+@keyframes blobDrift1 {
+  0%, 100% { transform: translate(-10%, -10%) scale(1); }
+  50% { transform: translate(20%, 10%) scale(1.2); }
+}
+@keyframes blobDrift2 {
+  0%, 100% { transform: translate(20%, 20%) scale(1.2); }
+  50% { transform: translate(-10%, -20%) scale(0.8); }
+}
+@keyframes blobDrift3 {
+  0%, 100% { transform: translate(10%, 80%); }
+  50% { transform: translate(50%, 20%); }
+}
+@keyframes blobDrift4 {
+  0%, 100% { transform: translate(-20%, 60%) scale(0.8); }
+  50% { transform: translate(30%, -10%) scale(1.1); }
+}
+
+:root {
+  /* MARKETPLACE UI Palette / Amazon & Jumia Inspiration */
+  --background: #f1f5f9; /* Light gray background to make white cards pop */
+  --foreground: #0f1111; /* Amazon dark gray */
+  --primary: #f97316; /* Jumia/Amazon vibrant orange for CTA */
+  --primary-dark: #ea580c;
+  --secondary: #131921; /* Amazon header navy */
+  --secondary-light: #232f3e;
+  --accent: #f59e0b;
+  --bg-creme: #ffffff; /* Replaced with pure white */
+  
+  --text-muted: #565959;
+  --border: #e2e8f0;
+  --glass: #ffffff;
+  --glass-border: #e2e8f0;
+
+  /* Typography Scale */
+  --h1-size: clamp(2.5rem, 5vw, 4rem);
+  --h2-size: clamp(2rem, 4vw, 3rem);
+  --h3-size: clamp(1.5rem, 3vw, 2rem);
+  --h4-size: clamp(1.2rem, 2vw, 1.5rem);
+  --body-size: 1rem;
+  
+  /* Fonts — variables injected by next/font/google via layout.tsx */
+  --font-serif: var(--font-inter, 'Inter', sans-serif); /* Fallback serif to sans-serif for modern marketplace */
+  --font-heading: var(--font-inter, 'Inter', sans-serif);
+  --font-body: var(--font-inter, 'Inter', sans-serif);
+  --font-handwriting: var(--font-inter, 'Inter', sans-serif);
+
+  /* Marketplace Spacing & Borders */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+  
+  --transition-fast: 0.15s ease;
+  --transition: 0.2s ease-in-out;
+
+  /* Responsive Spacing & Balancing */
+  --container-padding: 2rem;
+  --container-max-width: 1500px;
+  --section-padding-top: 10rem;
+  --section-padding-bottom: 3rem;
+  --content-gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --container-padding: 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --container-padding: 1.5rem;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+  text-decoration: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+@media (max-width: 640px) {
+  h1 { font-size: clamp(2rem, 10vw, 3rem) !important; line-height: 1.1 !important; }
+  h2 { font-size: clamp(1.8rem, 8vw, 2.5rem) !important; }
+  h3 { font-size: clamp(1.5rem, 6vw, 2rem) !important; }
+  p { font-size: 1rem !important; line-height: 1.6 !important; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.btn-hover:hover {
+  transform: translateY(-5px);
+  filter: brightness(1.1);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.nav-blur {
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.glass-card-premium {
+  backdrop-filter: blur(24px) saturate(180%);
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 40px 100px -20px rgba(0, 45, 38, 0.08);
+}
+
+.blend-screen {
+  mix-blend-mode: screen;
+}
+
+.blend-multiply {
+  mix-blend-mode: multiply;
+}
+
+.blend-overlay {
+  mix-blend-mode: overlay;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.liquid-card-organic {
+  border-radius: var(--radius-md);
+  background: white;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition);
+  padding: 2rem;
+}
+
+.liquid-card-organic:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.liquid-blob-btn {
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  text-transform: none;
+  font-weight: 600;
+}
+
+.liquid-blob-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md) !important;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.hero-split-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 992px) {
+  .hero-split-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+.shemous-scurve-card {
+  background: white;
+  transition: all var(--transition);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.shemous-scurve-card img {
+  object-fit: contain;
+  width: 100%;
+  aspect-ratio: 1;
+  background: white;
+  padding: 1rem;
+}
+
+.shemous-scurve-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Professional Truncation */
+.text-truncate-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-scurve-header {
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+
+.card-scurve-content {
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.scurve-bg-fix {
+  display: none;
+}
+
+.wavy-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 8px;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='8' viewBox='0 0 100 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 4C10 0 20 8 30 4C40 0 50 8 60 4C70 0 80 8 90 4C100 0 110 8 120 4' stroke='%23FFB703' stroke-width='2'/%3E%3C/svg%3E") repeat-x;
+  background-size: 40px 8px;
+}
+
+/* Premium Form Elements */
+.shemous-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--secondary);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.shemous-input {
+  width: 100%;
+  padding: 1.1rem 1.4rem;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 77, 64, 0.1);
+  border-radius: 18px;
+  font-size: 1rem;
+  color: var(--secondary);
+  outline: none;
+  transition: all 0.3s var(--transition);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.shemous-input:focus {
+  background: white;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(255, 183, 3, 0.15), 0 10px 20px -10px rgba(0, 77, 64, 0.1);
+  transform: translateY(-2px);
+}
+
+.shemous-input::placeholder {
+  color: rgba(0, 77, 64, 0.3);
+}
+
+.glass-card-organic {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50px 20px 50px 20px;
+  padding: 3.5rem;
+  box-shadow: 0 40px 100px -20px rgba(0, 45, 38, 0.12);
+}
+
+/* =========================================
+   ANIMATIONS & TRANSITIONS
+   ========================================= */
+
+/* Lazy image fade-in */
+img {
+  transition: opacity 0.4s ease;
+}
+img[loading="lazy"] {
+  opacity: 0;
+}
+img[loading="lazy"].loaded,
+img:not([loading]) {
+  opacity: 1;
+}
+
+/* Shimmer on hover (for cards, stats, buttons) */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.shimmer-hover {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255,255,255,0.35) 50%,
+    transparent 60%
+  );
+  background-size: 400px 100%;
+  background-position: -400px 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.shimmer-hover:hover::after {
+  opacity: 1;
+  animation: shimmer 0.75s ease forwards;
+}
+
+/* Pulse ring (for CTA / badge highlights) */
+@keyframes pulseRing {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+.pulse-ring {
+  position: relative;
+}
+.pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  border: 2px solid var(--primary);
+  animation: pulseRing 2s ease-out infinite;
+  pointer-events: none;
+}
+
+/* Smooth all interactive transitions */
+a, button {
+  transition: all var(--transition-fast);
+}
+
+/* Stagger grid utility */
+.stagger-grid > * {
+  animation: fadeSlideUp 0.6s var(--transition) both;
+}
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.stagger-grid > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-grid > *:nth-child(2) { animation-delay: 0.12s; }
+.stagger-grid > *:nth-child(3) { animation-delay: 0.19s; }
+.stagger-grid > *:nth-child(4) { animation-delay: 0.26s; }
+.stagger-grid > *:nth-child(5) { animation-delay: 0.33s; }
+.stagger-grid > *:nth-child(6) { animation-delay: 0.40s; }
+
+/* Smooth page scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar on filter bar */
+.glass-card-organic-bar::-webkit-scrollbar { display: none; }
+.glass-card-organic-bar { scrollbar-width: none; }
+
+/* Custom minimal scrollbar for other content */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,77,64,0.2); border-radius: 100px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,77,64,0.4); }
+
+/* Skeleton loading shimmer */
+@keyframes skeletonPulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.8; }
+}
+.skeleton {
+  background: linear-gradient(90deg, rgba(0,77,64,0.06) 25%, rgba(0,77,64,0.12) 50%, rgba(0,77,64,0.06) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: 12px;
+}
+
+/* Smooth image loading transition */
+@keyframes imageFadeIn {
+  from { opacity: 0; transform: scale(1.02); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.img-lazy-fade {
+  animation: imageFadeIn 0.5s ease forwards;
+}
+
+/* =========================================
+   MOBILE RESPONSIVE OVERRIDES
+   ========================================= */
+
+/* -- Global overflow protection -- */
+html, body {
+  overflow-x: hidden;
+}
+
+/* -- About page heritage image -- */
+@media (max-width: 768px) {
+  /* Minimal overrides needed since we use grid and standard components now */
+  .hero-split-grid {
+    gap: 1.5rem !important;
+  }
+}
+
+/* -- Small phone screens -- */
+@media (max-width: 480px) {
+  .hero-split-grid {
+    gap: 1rem !important;
+  }
+
+  /* Make product images responsive on phones */
+  .product-export-image {
+    width: 100% !important;
+    height: 100% !important;
+    border-width: 0px !important;
+  }
+
+  .glass-card-organic {
+    padding: 2rem !important;
+    border-radius: 24px !important;
+  }
+
+  /* Contact page form grids */
+  .hero-split-grid {
+    gap: 1.5rem !important;
+  }
+}
+
+/* -- Admin panel mobile -- */
+@media (max-width: 640px) {
+  /* Admin dashboard stat cards */
+  .liquid-card-organic {
+    min-width: 0 !important;
+  }
+}
+
+/* -- Animate spin for loader -- */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
