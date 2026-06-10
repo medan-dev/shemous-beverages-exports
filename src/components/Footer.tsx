@@ -34,7 +34,7 @@ export default function Footer() {
           }}
         >
           {/* Brand Column */}
-          <div style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }} className="footer-brand">
             <Link href="/" style={{ display: 'inline-block' }}>
               <img 
                 src="/images/shemous_logo_master_transparent.png" 
@@ -53,7 +53,7 @@ export default function Footer() {
           </div>
 
           {/* Links Column */}
-          <div style={{ flex: '1 1 200px' }}>
+          <div className="footer-col">
             <h4 style={{ color: 'white', marginBottom: '1.5rem', fontSize: '1.1rem', fontWeight: '700', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Discover</h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <li><Link href="/products" className="footer-link">Our Products</Link></li>
@@ -64,18 +64,18 @@ export default function Footer() {
           </div>
 
           {/* Support Column */}
-          <div style={{ flex: '1 1 200px' }}>
+          <div className="footer-col">
             <h4 style={{ color: 'white', marginBottom: '1.5rem', fontSize: '1.1rem', fontWeight: '700', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Support</h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <li><Link href="/contact" className="footer-link">Contact Us</Link></li>
-              <li><Link href="/wholesale" className="footer-link">Wholesale Registration</Link></li>
+              <li><Link href="/wholesale" className="footer-link">Wholesale</Link></li>
               <li><Link href="/certifications" className="footer-link">Certifications</Link></li>
               <li><Link href="/privacy" className="footer-link">Privacy Policy</Link></li>
             </ul>
           </div>
 
           {/* Contact Column */}
-          <div style={{ flex: '1 1 250px' }}>
+          <div className="footer-col footer-contact">
             <h4 style={{ color: 'white', marginBottom: '1.5rem', fontSize: '1.1rem', fontWeight: '700', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Contact</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
@@ -88,7 +88,7 @@ export default function Footer() {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <Mail size={20} color="#10b981" style={{ flexShrink: 0 }} />
-                <span style={{ color: '#94a3b8', fontSize: '0.95rem' }}>export@Shemousbeveragesexports.shop</span>
+                <span style={{ color: '#94a3b8', fontSize: '0.85rem', wordBreak: 'break-all' }}>export@Shemousbeveragesexports.shop</span>
               </div>
             </div>
           </div>
@@ -165,17 +165,45 @@ export default function Footer() {
 
         @media (max-width: 1024px) {
           .footer-grid {
-            gridTemplateColumns: 'repeat(2, 1fr)' !important;
+            grid-template-columns: repeat(2, 1fr) !important;
           }
         }
         @media (max-width: 768px) {
           .footer-grid {
-            gridTemplateColumns: '1fr' !important;
             gap: 3rem !important;
+          }
+          .footer-brand {
+            grid-column: 1 / -1;
+            align-items: center !important;
+            text-align: center;
+            margin-bottom: 0.5rem;
+          }
+          .footer-col {
+            align-items: center !important;
+            text-align: center;
+          }
+          .footer-col h4 {
+            text-align: center;
+            width: 100%;
+          }
+          .footer-col ul {
+            align-items: center !important;
+          }
+          .footer-contact {
+            grid-column: 1 / -1;
+            margin-top: 0.5rem;
+            align-items: center !important;
+            text-align: center;
+          }
+          .footer-contact > div > div {
+            justify-content: center !important;
+            align-items: center !important;
+            text-align: center;
           }
           .footer-bottom {
             flex-direction: column;
             text-align: center;
+            gap: 1.5rem !important;
           }
         }
       `}</style>
