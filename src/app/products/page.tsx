@@ -107,46 +107,9 @@ export default function ProductsPage() {
     }
   }, [])
 
-  const fallbackProducts = [
-    {
-      id: 'prod-juice',
-      name: 'Premium Banana Juice',
-      category: 'Banana Juice',
-      description: '100% organic, cold-pressed banana juice, capturing the sweet, pure essence of Ugandan harvests.',
-      image_url: '/images/export_banana_juice.png',
-      heritage: true
-    },
-    {
-      id: 'prod-smoothie',
-      name: 'Banana Smoothie',
-      category: 'Banana Smoothie',
-      description: 'A rich, creamy, and naturally sweet banana smoothie blended for maximum organic nutrition.',
-      image_url: '/images/export_banana_smoothie.png',
-      heritage: false
-    },
-    {
-      id: 'prod-chips',
-      name: 'Artisan Banana Chips',
-      category: 'Dried Banana Chips',
-      description: 'Crispy, golden-baked artisan banana chips, lightly sweetened for the perfect healthy organic snack.',
-      image_url: '/images/export_banana_chips.png',
-      heritage: false
-    },
-    {
-      id: 'prod-milk',
-      name: 'Organic Banana Milk',
-      category: 'Banana Milk',
-      description: 'Dairy-free, naturally sweet plant-based banana milk, exceptionally rich in potassium and flavor.',
-      image_url: '/images/nectar.png',
-      heritage: false
-    }
-  ];
-
-  const sourceProducts = productList.length > 0 ? productList : fallbackProducts;
-
   const filteredProducts = activeCategory === 'All' 
-    ? sourceProducts 
-    : sourceProducts.filter(p => p.category === activeCategory)
+    ? productList 
+    : productList.filter(p => p.category === activeCategory)
 
   return (
     <div style={{ 

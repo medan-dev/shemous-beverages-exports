@@ -82,7 +82,7 @@ export default function AdminLogin() {
                 type="email" 
                 required 
                 style={inputStyle} 
-                placeholder="admin@shemous.com"
+                placeholder="admin@shem.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />

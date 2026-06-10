@@ -10,6 +10,7 @@ import {
   Globe,
   Mail
 } from 'lucide-react'
+import PrintReportButton from './PrintReportButton'
 
 export const metadata = {
   title: 'Business Analytics | Shemous Admin',
@@ -122,21 +123,7 @@ export default async function AnalyticsPage() {
            </div>
 
            <div style={{ marginTop: 'auto', paddingTop: '2rem' }}>
-              <button 
-                 style={{ 
-                    width: '100%', 
-                    padding: '1rem', 
-                    background: 'rgba(255, 255, 255, 0.1)', 
-                    border: '1px solid rgba(255, 255, 255, 0.2)', 
-                    borderRadius: '12px', 
-                    color: 'white', 
-                    fontWeight: '700', 
-                    cursor: 'pointer',
-                    transition: '0.2s'
-                 }}
-              >
-                 Generate Q1 Report
-              </button>
+              <PrintReportButton />
            </div>
         </div>
       </div>

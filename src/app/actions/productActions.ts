@@ -3,12 +3,12 @@
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const serviceRoleKey = process.env.PORTAL_ADMIN_KEY!
+const serviceRoleKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
 export async function saveProductAction(payload: any, productId?: string) {
   try {
     if (!supabaseUrl || !serviceRoleKey) {
-      return { error: 'Server configuration missing SUPABASE_URL or PORTAL_ADMIN_KEY' }
+      return { error: 'Server configuration missing SUPABASE_URL or ANON_KEY' }
     }
 
     const adminSupabase = createClient(supabaseUrl, serviceRoleKey)

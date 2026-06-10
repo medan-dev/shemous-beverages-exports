@@ -14,10 +14,10 @@ export async function uploadProductImage(formData: FormData) {
     // Initialize Supabase correctly with the Service Role Key
     // This allows us to bypass Row Level Security restrictions since the user is not authenticated natively
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-    const serviceRoleKey = process.env.PORTAL_ADMIN_KEY! // The key found in .env.local
+    const serviceRoleKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
-    if (!serviceRoleKey) {
-      return { error: 'Server configuration missing PORTAL_ADMIN_KEY' }
+    if (!supabaseUrl || !serviceRoleKey) {
+      return { error: 'Server configuration missing SUPABASE_URL or ANON_KEY' }
     }
 
     console.log('[UploadAction] Starting upload for:', path)

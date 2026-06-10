@@ -105,6 +105,14 @@ export default function AdminProducts() {
     }
   }
 
+  // Notification state
+  const [notification, setNotification] = useState<{ message: string; type: 'success' | 'error' } | null>(null)
+
+  const showNotification = (message: string, type: 'success' | 'error') => {
+    setNotification({ message, type })
+    setTimeout(() => setNotification(null), 3000)
+  }
+
   const handleSaveProduct = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -124,7 +132,7 @@ export default function AdminProducts() {
 
       if (result.error) {
          console.error('Upload Error:', result.error)
-         alert(`Image Upload Failed: ${result.error}. Ensure you have admin privileges.`)
+         showNotification(`Image Upload Failed: ${result.error}.`, 'error')
          setIsSubmitting(false)
          return
       }
@@ -155,10 +163,11 @@ export default function AdminProducts() {
     const resultAction = await saveProductAction(payload, editingProduct?.id)
 
     if (resultAction.success) { 
-       fetchProducts() 
-       closePanel() 
+       await fetchProducts() 
+       closePanel()
+       showNotification(editingProduct ? 'Product successfully updated.' : 'New product successfully added.', 'success')
     } else { 
-       alert(`Save failed: ${resultAction.error}`) 
+       showNotification(`Save failed: ${resultAction.error}`, 'error')
     }
     setIsSubmitting(false)
   }
@@ -166,7 +175,19 @@ export default function AdminProducts() {
   const handleConfirmDelete = async () => {
     if (!deleteTarget) return
     setIsDeleting(true)
-    await supabase.from('products').delete().eq('id', deleteTarget.id)
+    const targetId = deleteTarget.id
+    const targetName = deleteTarget.name
+    
+    // Optimistic Update
+    setProducts(prev => prev.filter(p => p.id !== targetId))
+    
+    const { error } = await supabase.from('products').delete().eq('id', targetId)
+    if (!error) {
+       showNotification(`Product "${targetName}" deleted successfully.`, 'success')
+    } else {
+       showNotification(`Delete failed: ${error.message}`, 'error')
+       await fetchProducts() // Rollback on error
+    }
     setDeleteTarget(null)
     setIsDeleting(false)
   }
@@ -355,6 +376,14 @@ export default function AdminProducts() {
           </div>
         </div>,
         document.body
+      )}
+
+      {/* Custom Inline Notification Modal */}
+      {notification && (
+        <div style={{ position: 'fixed', top: '2rem', left: '50%', transform: 'translateX(-50%)', zIndex: 9999, padding: '1rem 2rem', borderRadius: '8px', background: notification.type === 'success' ? '#e6f4ea' : '#fce8e6', color: notification.type === 'success' ? '#137333' : '#c5221f', border: `1px solid ${notification.type === 'success' ? '#ceead6' : '#fad2cf'}`, boxShadow: '0 4px 12px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', gap: '0.75rem', fontWeight: 'bold' }}>
+          {notification.type === 'success' ? <CheckCircle size={20} /> : <AlertTriangle size={20} />}
+          {notification.message}
+        </div>
       )}
 
     </div>
